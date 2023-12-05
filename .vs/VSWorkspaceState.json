@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src"
   ],
-  "SelectedNode": "\\C:\\Users\\Konstantinos\\Documents\\Bootcamp\\Project",
+  "SelectedNode": "\\src\\App.js",
   "PreviewInSolutionExplorer": false
 }
