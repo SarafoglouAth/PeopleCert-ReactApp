@@ -1,42 +1,44 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Product from './Products';
-import NodeJSPic from "../Pics/NodeJSPic.webp"
-import AngularPic from "../Pics/AngularPic.webp"
-import ReactPic from "../Pics/ReactPic.webp"
-import "./ProductShowcase.css"
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import './ProductShowcase.css';
 
+import PaymentForm from "./Popup";
 
 const ProductShowcase = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [productData, setProductData] = useState([]);
-    const [pass, setPass] = useState(true);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get("https://api.mocki.io/v2/1e376031/ProductsEshop");
+                const response = await axios.get('https://api.mocki.io/v2/1e376031/ProductsEshop');
                 setProductData(response.data);
-                console.log(typeof response.data);
             } catch (error) {
-                console.error("Error fetching user data:", error);
+                console.error('Error fetching user data:', error);
             }
         };
 
         fetchUserData();
     }, []);
 
+    const purchaseHandler = (product) => {
+        setSelectedProduct(product);
+        setShowPopup(true);
+    };
 
-    const purchaseHandler = () => {
-        return null;
-    }
-
+    const handlePurchaseSubmit = () => {
+        setShowPopup(false);
+        alert('Purchase successful!')
+    };
 
     return (
         <div className="product-showcase">
             <h2>Featured Products</h2>
             <div className="products">
-                {pass && productData.map((product) => (
+                {productData.map((product) => (
                     <div key={product.ExamID}>
                         <Product
                             key={product.ExamID}
@@ -44,16 +46,25 @@ const ProductShowcase = () => {
                             image={product.Image}
                             description={product.Description}
                             price={product.Price}
-                            Purchase={purchaseHandler()}
-                            isPurchased={((product.ExamPurchaseDate && product.ExamDate )&& (product.IsSuccess === false || product.IsSuccess == null ))}
-                        /></div>
+                            Purchase={() => purchaseHandler(product)}
+                            isPurchased={product.IsPurchased}
+                        />
+                    </div>
                 ))}
             </div>
+
+            {showPopup && (
+                    <div className="popup">
+                    <span className="close" onClick={() => setShowPopup(false)}>
+                        &times;
+                    </span>
+                        <PaymentForm TheProduct={selectedProduct} handlePurchaseSubmit={handlePurchaseSubmit} />
+
+                    </div>
+
+            )}
         </div>
     );
 };
 
 export default ProductShowcase;
-
-
-
