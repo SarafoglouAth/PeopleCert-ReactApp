@@ -195,7 +195,7 @@ function Questions() {
   //TO be implemented
   const [editRow, deleteRow, addRow] = [todoToast, todoToast, todoToast];
 
-
+    //Expand answers list
   const toggleAnswer = (rowData) => {
     if (getExpandedRows().includes(rowData.id)) {
       setExpandedRows(null);
@@ -215,7 +215,7 @@ function Questions() {
 
     return Object.entries(expandedRows)
                  .filter(([_, value]) => value)
-                .map(([key, _]) => key);
+                 .map(([key, _]) => key);
   };
 
   return (
