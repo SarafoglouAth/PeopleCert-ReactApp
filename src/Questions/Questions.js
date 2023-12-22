@@ -4,6 +4,8 @@ import "primeflex/primeflex.css";
 import "./Questions.css";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 
+import QuestionSampleImage from "../Pics/QuestionSampleImage.jpg";
+
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProductService } from "../Service/ProductService";
@@ -13,6 +15,7 @@ import { Image } from "primereact/image";
 import { Dialog } from "primereact/dialog";
 
 import { InputText } from "primereact/inputtext";
+
 
 
 function Questions() {
@@ -43,7 +46,7 @@ function Questions() {
   const imageBodyTemplate = (rowData) => {
     return (
       <img
-        src={`https://getwallpapers.com/wallpaper/full/c/6/5/616497.jpg`}
+        src={QuestionSampleImage}
         alt={rowData.image}
         width="64px"
         className="shadow-4"
@@ -214,7 +217,7 @@ function Questions() {
         onHide={() => setVisible(false)}
       >
         <Image
-          src="https://getwallpapers.com/wallpaper/full/c/6/5/616497.jpg"
+          src={QuestionSampleImage}
           alt="Image"
           width="100%"
         />
