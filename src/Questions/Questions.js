@@ -4,7 +4,6 @@ import "primeflex/primeflex.css";
 import "./Questions.css";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 
-import { Tooltip } from "primereact/tooltip";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProductService } from "../Service/ProductService";
@@ -15,7 +14,6 @@ import { Dialog } from "primereact/dialog";
 
 import { InputText } from "primereact/inputtext";
 
-const loopTest = ["Question 1", "Question 2", "Question 3", "Question 4"];
 
 function Questions() {
   //FOR ROW EXPANSION
@@ -60,7 +58,7 @@ function Questions() {
 
   const rowExpansionTemplate = (test) => {
     return (
-      <div className="p-3">
+      <div className="p-1">
         <DataTable
           value={products}
           editMode="row"
@@ -74,10 +72,22 @@ function Questions() {
             editor={(options) => textEditor(options)}
             style={{ width: "95%" }}
           ></Column>
+          <Column className="p-1 flex flex-column justify-content-center align-items-center" header="Update" rowEditor></Column>
           <Column
-            rowEditor
-            headerStyle={{ width: "5%", minWidth: "1rem" }}
-            bodyStyle={{ textAlign: "center" }}
+            className="p-1 "
+            header="Remove"
+            body={
+              <div className="flex flex-column justify-content-center align-items-center">
+                <Button
+                  tooltip="Delete an Answer"
+                  tooltipOptions={{ position: "left" }}
+                  icon="pi pi-trash"
+                  size="small"
+                  severity="danger"
+                  style={{ width: "35px" }}
+                ></Button>
+              </div>
+            }
           ></Column>
         </DataTable>
       </div>
@@ -147,7 +157,7 @@ function Questions() {
 
   const [visibleImagePopup, setVisible] = useState(false);
 
-  //FOR Cute popup 
+  //FOR Cute popup
   const todoToast = (item) =>
     toast.current.show({
       severity: "info",
@@ -192,11 +202,7 @@ function Questions() {
           style={{ width: "120px" }}
         />
 
-        <Column
-          header="Add/Remove"
-          style={{ width: "100px" }}
-          body={questionButtons}
-        />
+        <Column header="Update/Remove" body={questionButtons} />
       </DataTable>
       {/* POPUP Image element */}
       <Dialog
