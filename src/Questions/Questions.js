@@ -6,6 +6,7 @@ import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 
 import QuestionSampleImage from "../Pics/QuestionSampleImage.jpg";
 
+import { Checkbox } from "primereact/checkbox";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { ProductService } from "../Service/ProductService";
@@ -13,8 +14,6 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { Image } from "primereact/image";
 import { Dialog } from "primereact/dialog";
-
-import { InputText } from "primereact/inputtext";
 
 
 
@@ -55,32 +54,60 @@ function Questions() {
     );
   };
 
-  const allowExpansion = (rowData) => {
-    return rowData.orders.length > 0;
-  };
 
   const rowExpansionTemplate = (test) => {
     return (
       <div className="p-1">
         <DataTable
           value={products}
-          editMode="row"
           dataKey="id"
-          onRowEditComplete={onRowEditComplete}
-          tableStyle={{ minWidth: "50rem" }}
+          tableStyle={{ minWidth: "5rem" }}
+          stripedRows={true}
         >
           <Column
             field="code"
-            header="Answers"
-            editor={(options) => textEditor(options)}
+            header={
+              <div className="flex align-items-center gap-2">
+                <span>Answers</span>
+                <Button
+                  label="Add"
+                  tooltip="Add an Answer"
+                  icon="pi pi-plus"
+                  size="small"
+                  severity="success"
+                  style={{ width: "90px", height: "30px" }}
+                  onClick={(e) => addRow()}
+                />
+              </div>
+            }
             style={{ width: "95%" }}
           ></Column>
-          <Column className="p-1 flex flex-column justify-content-center align-items-center" header="Update" rowEditor></Column>
           <Column
             className="p-1 "
-            header="Remove"
+            header="Correct"
             body={
               <div className="flex flex-column justify-content-center align-items-center">
+                <div className="card flex justify-content-center">
+                  <Checkbox
+                    onChange={(e) => setChecked(e.checked)}
+                    checked={checked}
+                  ></Checkbox>
+                </div>
+              </div>
+            }
+          ></Column>
+          <Column
+            className="p-1 "
+            body={
+              <div className="flex justify-content-center align-items-center gap-2">
+                <Button
+                  tooltip="Update an Answer"
+                  tooltipOptions={{ position: "left" }}
+                  icon="pi pi pi-pencil"
+                  size="small"
+                  severity="secondary"
+                  style={{ width: "35px" }}
+                ></Button>
                 <Button
                   tooltip="Delete an Answer"
                   tooltipOptions={{ position: "left" }}
@@ -116,6 +143,16 @@ function Questions() {
   const questionButtons = (rowData) => (
     <div className="flex flex-column justify-content-center align-items-center gap-2">
       <Button
+        label="Answers"
+        tooltip="Expand Answers"
+        tooltipOptions={{ position: "left" }}
+        icon="pi pi-eye"
+        size="small"
+        severity="info"
+        style={{ width: "90px" }}
+        onClick={(e) => toggleAnswer(rowData)}
+      />
+      <Button
         label="Update"
         tooltip="Update a Question"
         tooltipOptions={{ position: "left" }}
@@ -137,24 +174,7 @@ function Questions() {
       />
     </div>
   );
-  const onRowEditComplete = (e) => {
-    let _products = [...products];
-    let { newData, index } = e;
 
-    _products[index] = newData;
-
-    setProducts(_products);
-  };
-
-  const textEditor = (options) => {
-    return (
-      <InputText
-        type="text"
-        value={options.value}
-        onChange={(e) => options.editorCallback(e.target.value)}
-      />
-    );
-  };
 
   //FOR IMAGE POPUP
 
@@ -167,7 +187,36 @@ function Questions() {
       summary: "Info",
       detail: `editRow: ${!!item ? JSON.stringify(item) : "empty"}`,
     });
+
+  //Checkbox
+
+  const [checked, setChecked] = useState(false);
+
+  //TO be implemented
   const [editRow, deleteRow, addRow] = [todoToast, todoToast, todoToast];
+
+
+  const toggleAnswer = (rowData) => {
+    if (getExpandedRows().includes(rowData.id)) {
+      setExpandedRows(null);
+      return;
+    }
+
+    const _expandedRow = {[rowData.id]: true};
+
+    setExpandedRows(_expandedRow);
+  };
+
+  
+  const getExpandedRows = () => {
+    if (!expandedRows) {
+      return [];
+    }
+
+    return Object.entries(expandedRows)
+                 .filter(([_, value]) => value)
+                .map(([key, _]) => key);
+  };
 
   return (
     <div className="card">
@@ -179,9 +228,9 @@ function Questions() {
         rowExpansionTemplate={rowExpansionTemplate}
         dataKey="id"
         header={header}
-        tableStyle={{ minWidth: "60rem" }}
+        tableStyle={{ minWidth: "6rem" }}
+        stripedRows={true}
       >
-        <Column expander={allowExpansion} style={{ width: "5rem" }} />
         <Column
           field="name"
           header={
@@ -216,11 +265,7 @@ function Questions() {
         style={{ width: "50vw" }}
         onHide={() => setVisible(false)}
       >
-        <Image
-          src={QuestionSampleImage}
-          alt="Image"
-          width="100%"
-        />
+        <Image src={QuestionSampleImage} alt="Image" width="100%" />
       </Dialog>
     </div>
   );
