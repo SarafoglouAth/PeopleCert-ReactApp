@@ -20,7 +20,12 @@
     background-color: #fff;
     text-align: center;
 }
-
+.TxtAlCntr{
+    text-align: center;
+}
+.Rounded{
+    border-radius: 10px;
+}
 .Mrg-50{
     margin-top: 50px;
 }
@@ -38,34 +43,24 @@
     margin: 8px 0;
 }
 
-.product button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.product button:hover {
-    background-color: #0056b3;
-}
-
-.product button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-
-
 .popup {
-    position: fixed;
+    position: absolute; /* Change from fixed to absolute */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    max-height: 80%; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
-
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+.Bckgrnd-Clr{
+    background-color: #6EB0E0FF;
+    border-radius: 50%;
+}
 
 

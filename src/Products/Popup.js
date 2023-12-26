@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './Popup.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NodeJSPic from "../Pics/NodeJSPic.webp";
 import AngularPic from "../Pics/AngularPic.webp";
 import ReactPic from "../Pics/ReactPic.webp";
+
 
 const images = {
     NodeJSPic,
@@ -11,6 +12,7 @@ const images = {
     ReactPic,
 };
 function Popup({TheProduct,handlePurchaseSubmit}) {
+
     const selectedImage = images[TheProduct.Image];
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolder, setCardHolder] = useState('');
@@ -54,18 +56,19 @@ function Popup({TheProduct,handlePurchaseSubmit}) {
     const handleSubmit = () => {
         const isValid = validateCardDetails();
         if (isValid) {
+
             handlePurchaseSubmit();
         }
     };
 
     return (
         <div>
+
             {/* ==============================================
 	    Credit Card Payment Section
 	    ===============================================*/}
             <section className="credit-card">
                 <div className="container">
-
                     <div className="card-holder">
                         <div className="card-box bg-news">
                             <div className="row">

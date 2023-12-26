@@ -42,6 +42,7 @@ body{margin-top:20px;}
     padding: 0;
     max-width: 600px;
     margin: auto;
+
 }
 
 .credit-card .title{
@@ -111,11 +112,29 @@ body{margin-top:20px;}
     .credit-card{
         height: 250vh;
         width: 100%;
+
     }
     .credit-card .title {
         font-size: 1.2em;
     }
+    .credit-card .card-details {
+        padding: 40px 40px 30px;
+        max-height: 400px; /* Set a maximum height */
+        overflow-y: auto; /* Enable vertical scrolling */
+    }
 
+    .col-lg-6 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .product img {
+        max-width: 80%; /* Adjust the maximum width of the image */
+        height: auto;
+    }
     .credit-card .row .col-lg-6 {
         margin-bottom: 40px;
     }
