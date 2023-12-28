@@ -44,6 +44,11 @@ function Questions() {
   const collapseAll = () => {
     setExpandedRows(null);
   };
+  
+  //for text input
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [dialogHeader, setDialogHeader] = useState("");
+
 
   const imageBodyTemplate = (rowData) => {
     return (
@@ -58,8 +63,6 @@ function Questions() {
   };
 
   //Testing Admin ui
-
-  const [dialogVisibleasAnswers, setDialogVisibleAnswers] = useState(false);
   const [value, setValue] = useState("");
   const [admin, setAdminValue] = useState(true);
 
@@ -82,36 +85,13 @@ function Questions() {
         icon="pi pi-plus"
         size="small"
         severity="success"
-        style={{ width: "90px", height: "30px" }}
-        onClick={() => setDialogVisibleAnswers(true)}
+        style={{ width: "90px", height: "35px" }}
+        onClick={() => {
+          setDialogVisible(true);
+          setDialogHeader("Add an Answer");
+        }}
         // onClick={(e) => addRow()}
       />
-      <Dialog
-        header="Add new Answer"
-        visible={dialogVisibleasAnswers}
-        style={{ width: "75vw" }}
-        contentStyle={{ height: "305px" }}
-        onHide={() => setDialogVisibleAnswers(false)}
-        footer={
-          <Button
-            label="Save"
-            tooltip="Save the Answer"
-            icon="pi pi-plus"
-            size="small"
-            severity="success"
-            style={{ width: "90px", height: "30px" }}
-            // onClick={(e) => addRow()}
-          />
-        }
-      >
-        <InputTextarea
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          autoResize
-          style={{ minWidth: "100%" }}
-          rows={12}
-        />
-      </Dialog>
     </div>
   );
 
@@ -138,6 +118,10 @@ function Questions() {
             size="small"
             severity="secondary"
             style={{ width: "35px" }}
+            onClick={() => {
+              setDialogVisible(true);
+              setDialogHeader("Update the Answer");
+            }}
           ></Button>
           <Button
             tooltip="Delete an Answer"
@@ -222,13 +206,13 @@ function Questions() {
   const questionButtonsViewOnly = (rowData) => (
     <div className="flex flex-column justify-content-center align-items-center gap-1">
       <Button
-        label="Answers"
+        label=""
         tooltip="Expand Answers"
         tooltipOptions={{ position: "left" }}
         icon="pi pi-eye"
         size="small"
         severity="info"
-        style={{ width: "90px" }}
+        style={{ width: "35px" }}
         onClick={(e) => toggleAnswer(rowData)}
       />
     </div>
@@ -256,6 +240,10 @@ function Questions() {
         size="small"
         severity="secondary"
         style={{ width: "90px" }}
+        onClick={() => {
+          setDialogVisible(true);
+          setDialogHeader("Update the Question");
+        }}
         // onClick={(e) => editRow(rowData)}
       />
       <Button
@@ -304,9 +292,6 @@ function Questions() {
       .map(([key, _]) => key);
   };
 
-  //for text input
-  const [dialogVisible, setDialogVisible] = useState(false);
-
   //admin add questions start
 
   const AdminUiQestionsAddButtonOn = (
@@ -322,10 +307,13 @@ function Questions() {
         severity="success"
         style={{ width: "90px", height: "30px" }}
         // onClick={(e) => addRow()}
-        onClick={() => setDialogVisible(true)}
+        onClick={() => {
+          setDialogVisible(true);
+          setDialogHeader("Add new Question");
+        }}
       />
       <Dialog
-        header="Add new Question"
+        header={<span> {dialogHeader}</span>}
         visible={dialogVisible}
         style={{ width: "75vw" }}
         contentStyle={{ height: "305px" }}
@@ -334,7 +322,6 @@ function Questions() {
           <Button
             label="Save"
             tooltip="Save the Question"
-            icon="pi pi-plus"
             size="small"
             severity="success"
             style={{ width: "90px", height: "30px" }}
@@ -450,7 +437,6 @@ function Questions() {
           body={imageBodyTemplate}
           style={{ width: "120px" }}
         />
-
         {AdminUiQuestionsDeleteUpdateButtonsToggle()}
       </DataTable>
       {/* POPUP Image element */}
