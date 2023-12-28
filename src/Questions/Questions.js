@@ -26,9 +26,11 @@ function Questions() {
   const toast = useRef(null);
 
   useEffect(() => {
-    ProductService.getProductsWithOrdersSmall().then((data) =>
-      setProducts(data)
-    );
+    ProductService.getProductsWithOrdersSmall().then((data) => {
+      console.log(data);
+      // data[0].name =
+      setProducts(data);
+    });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const expandAll = () => {
@@ -55,6 +57,107 @@ function Questions() {
     );
   };
 
+  //Testing Admin ui
+
+  const [dialogVisibleasAnswers, setDialogVisibleAnswers] = useState(false);
+  const [value, setValue] = useState("");
+  const [admin, setAdminValue] = useState(true);
+
+  const AnswerWithoutButtons = (
+    <div className="flex align-items-center gap-2 ">
+      <span>
+        <h4>Answers</h4>
+      </span>
+    </div>
+  );
+
+  const AnswerWithButtons = (
+    <div className="flex align-items-center gap-2 ">
+      <span>
+        <h4>Answers</h4>
+      </span>
+      <Button
+        label="Add"
+        tooltip="Add an Answer"
+        icon="pi pi-plus"
+        size="small"
+        severity="success"
+        style={{ width: "90px", height: "30px" }}
+        onClick={() => setDialogVisibleAnswers(true)}
+        // onClick={(e) => addRow()}
+      />
+      <Dialog
+        header="Add new Answer"
+        visible={dialogVisibleasAnswers}
+        style={{ width: "75vw" }}
+        contentStyle={{ height: "305px" }}
+        onHide={() => setDialogVisibleAnswers(false)}
+        footer={
+          <Button
+            label="Save"
+            tooltip="Save the Answer"
+            icon="pi pi-plus"
+            size="small"
+            severity="success"
+            style={{ width: "90px", height: "30px" }}
+            // onClick={(e) => addRow()}
+          />
+        }
+      >
+        <InputTextarea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          autoResize
+          style={{ minWidth: "100%" }}
+          rows={12}
+        />
+      </Dialog>
+    </div>
+  );
+
+  function AdminUiAnswerAddButton() {
+    if (admin) {
+      return AnswerWithButtons;
+    }
+    return AnswerWithoutButtons;
+  }
+
+  //end of testing
+
+  //admin answer delete/update start
+
+  const AdminUiAnswerDeleteUpdateButtons = (
+    <Column
+      className="p-1 "
+      body={
+        <div className="flex justify-content-center align-items-center gap-2">
+          <Button
+            tooltip="Update an Answer"
+            tooltipOptions={{ position: "left" }}
+            icon="pi pi pi-pencil"
+            size="small"
+            severity="secondary"
+            style={{ width: "35px" }}
+          ></Button>
+          <Button
+            tooltip="Delete an Answer"
+            tooltipOptions={{ position: "left" }}
+            icon="pi pi-trash"
+            size="small"
+            severity="danger"
+            style={{ width: "35px" }}
+          ></Button>
+        </div>
+      }
+    ></Column>
+  );
+  function AdminUiAnswerDeleteUpdateButtonsToggle() {
+    if (admin) {
+      return AdminUiAnswerDeleteUpdateButtons;
+    }
+  }
+
+  //admin answer delete update end
 
   const rowExpansionTemplate = () => {
     return (
@@ -67,52 +170,9 @@ function Questions() {
         >
           <Column
             field="code"
-            header={
-              <div className="flex align-items-center gap-2 ">
-                <span>
-                  <h4>Answers</h4>
-                </span>
-                <Button
-                  label="Add"
-                  tooltip="Add an Answer"
-                  icon="pi pi-plus"
-                  size="small"
-                  severity="success"
-                  style={{ width: "90px", height: "30px" }}
-                  onClick={() => setDialogVisibleAnswers(true)}
-                  // onClick={(e) => addRow()}
-                />
-                <Dialog
-                header="Add new Answer"
-                visible={dialogVisibleasAnswers}
-                style={{ width: "75vw" }}
-                contentStyle={{ height: "305px" }}
-                onHide={() => setDialogVisibleAnswers(false)}
-                footer={
-                  <Button
-                    label="Save"
-                    tooltip="Save the Answer"
-                    icon="pi pi-plus"
-                    size="small"
-                    severity="success"
-                    style={{ width: "90px", height: "30px" }}
-                    // onClick={(e) => addRow()}
-                  />
-                }
-              >
-                <InputTextarea
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  autoResize
-                  style={{ minWidth: "100%" }}
-                  rows={12}
-                />
-              </Dialog>
-              </div>
-            }
-            style={{ width: "95%" }}          >
-              
-            </Column>
+            header={AdminUiAnswerAddButton}
+            style={{ width: "95%" }}
+          ></Column>
           <Column
             className="p-1 "
             header="Correct"
@@ -127,29 +187,7 @@ function Questions() {
               </div>
             }
           ></Column>
-          <Column
-            className="p-1 "
-            body={
-              <div className="flex justify-content-center align-items-center gap-2">
-                <Button
-                  tooltip="Update an Answer"
-                  tooltipOptions={{ position: "left" }}
-                  icon="pi pi pi-pencil"
-                  size="small"
-                  severity="secondary"
-                  style={{ width: "35px" }}
-                ></Button>
-                <Button
-                  tooltip="Delete an Answer"
-                  tooltipOptions={{ position: "left" }}
-                  icon="pi pi-trash"
-                  size="small"
-                  severity="danger"
-                  style={{ width: "35px" }}
-                ></Button>
-              </div>
-            }
-          ></Column>
+          {AdminUiAnswerDeleteUpdateButtonsToggle()}
         </DataTable>
       </div>
     );
@@ -172,9 +210,34 @@ function Questions() {
     </div>
   );
 
+  //admin questions delete/update start
+
+  function AdminUiQuestionsDeleteUpdateButtonsToggle() {
+    if (admin) {
+      return <Column header="Update/Remove" body={questionButtons} />;
+    }
+    return <Column body={questionButtonsViewOnly} />;
+  }
+
+  const questionButtonsViewOnly = (rowData) => (
+    <div className="flex flex-column justify-content-center align-items-center gap-1">
+      <Button
+        label="Answers"
+        tooltip="Expand Answers"
+        tooltipOptions={{ position: "left" }}
+        icon="pi pi-eye"
+        size="small"
+        severity="info"
+        style={{ width: "90px" }}
+        onClick={(e) => toggleAnswer(rowData)}
+      />
+    </div>
+  );
+  //admin questions delete/update end
+
   //FOR EDIT ROW
   const questionButtons = (rowData) => (
-    <div className="flex flex-column justify-content-center align-items-center gap-2">
+    <div className="flex flex-column justify-content-center align-items-center gap-1">
       <Button
         label="Answers"
         tooltip="Expand Answers"
@@ -243,11 +306,86 @@ function Questions() {
 
   //for text input
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [value, setValue] = useState("");
-  const [dialogVisibleasAnswers, setDialogVisibleAnswers] = useState(false);
+
+  //admin add questions start
+
+  const AdminUiQestionsAddButtonOn = (
+    <div className="flex align-items-center gap-2 ">
+      <span>
+        <h2>Question</h2>
+      </span>
+      <Button
+        label="Add"
+        tooltip="Add a Question"
+        icon="pi pi-plus"
+        size="small"
+        severity="success"
+        style={{ width: "90px", height: "30px" }}
+        // onClick={(e) => addRow()}
+        onClick={() => setDialogVisible(true)}
+      />
+      <Dialog
+        header="Add new Question"
+        visible={dialogVisible}
+        style={{ width: "75vw" }}
+        contentStyle={{ height: "305px" }}
+        onHide={() => setDialogVisible(false)}
+        footer={
+          <Button
+            label="Save"
+            tooltip="Save the Question"
+            icon="pi pi-plus"
+            size="small"
+            severity="success"
+            style={{ width: "90px", height: "30px" }}
+            // onClick={(e) => addRow()}
+          />
+        }
+      >
+        <InputTextarea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          autoResize
+          style={{ minWidth: "100%" }}
+          rows={12}
+        />
+      </Dialog>
+    </div>
+  );
+
+  const AdminUiQestionsAddButtonOff = (
+    <div className="flex align-items-center gap-2 ">
+      <span>
+        <h2>Question</h2>
+      </span>
+    </div>
+  );
+
+  function AdminUiQestionsAddButtonToggle() {
+    if (admin) {
+      return AdminUiQestionsAddButtonOn;
+    }
+    return AdminUiQestionsAddButtonOff;
+  }
+
+  //admin add questions end
 
   return (
     <div className="card">
+      <Button
+        label="Admin"
+        icon="pi pi-minus"
+        size="large"
+        severity="warning"
+        onClick={() => setAdminValue(false)}
+      />
+      <Button
+        label="Admin"
+        icon="pi pi-plus"
+        size="large"
+        severity="warning"
+        onClick={() => setAdminValue(true)}
+      />
       <Toast ref={toast} />
       <DataTable
         value={products}
@@ -261,49 +399,7 @@ function Questions() {
       >
         <Column
           field="name"
-          header={
-            <div className="flex align-items-center gap-2 ">
-              <span>
-                <h2>Question</h2>
-              </span>
-              <Button
-                label="Add"
-                tooltip="Add a Question"
-                icon="pi pi-plus"
-                size="small"
-                severity="success"
-                style={{ width: "90px", height: "30px" }}
-                // onClick={(e) => addRow()}
-                onClick={() => setDialogVisible(true)}
-              />
-              <Dialog
-                header="Add new Question"
-                visible={dialogVisible}
-                style={{ width: "75vw" }}
-                contentStyle={{ height: "305px" }}
-                onHide={() => setDialogVisible(false)}
-                footer={
-                  <Button
-                    label="Save"
-                    tooltip="Save the Question"
-                    icon="pi pi-plus"
-                    size="small"
-                    severity="success"
-                    style={{ width: "90px", height: "30px" }}
-                    // onClick={(e) => addRow()}
-                  />
-                }
-              >
-                <InputTextarea
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  autoResize
-                  style={{ minWidth: "100%" }}
-                  rows={12}
-                />
-              </Dialog>
-            </div>
-          }
+          header={AdminUiQestionsAddButtonToggle}
           className="text-lg"
         />
         <Column
@@ -312,7 +408,7 @@ function Questions() {
           style={{ width: "120px" }}
         />
 
-        <Column header="Update/Remove" body={questionButtons} />
+        {AdminUiQuestionsDeleteUpdateButtonsToggle()}
       </DataTable>
       {/* POPUP Image element */}
       <Dialog
