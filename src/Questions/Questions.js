@@ -14,8 +14,9 @@ import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { Image } from "primereact/image";
 import { Dialog } from "primereact/dialog";
+import { InputTextarea } from "primereact/inputtextarea";
 
-
+//make an obvious difference between question space and answer's
 
 function Questions() {
   //FOR ROW EXPANSION
@@ -55,7 +56,7 @@ function Questions() {
   };
 
 
-  const rowExpansionTemplate = (test) => {
+  const rowExpansionTemplate = () => {
     return (
       <div className="p-1">
         <DataTable
@@ -67,8 +68,10 @@ function Questions() {
           <Column
             field="code"
             header={
-              <div className="flex align-items-center gap-2">
-                <span>Answers</span>
+              <div className="flex align-items-center gap-2 ">
+                <span>
+                  <h4>Answers</h4>
+                </span>
                 <Button
                   label="Add"
                   tooltip="Add an Answer"
@@ -76,12 +79,40 @@ function Questions() {
                   size="small"
                   severity="success"
                   style={{ width: "90px", height: "30px" }}
-                  onClick={(e) => addRow()}
+                  onClick={() => setDialogVisibleAnswers(true)}
+                  // onClick={(e) => addRow()}
                 />
+                <Dialog
+                header="Add new Answer"
+                visible={dialogVisibleasAnswers}
+                style={{ width: "75vw" }}
+                contentStyle={{ height: "305px" }}
+                onHide={() => setDialogVisibleAnswers(false)}
+                footer={
+                  <Button
+                    label="Save"
+                    tooltip="Save the Answer"
+                    icon="pi pi-plus"
+                    size="small"
+                    severity="success"
+                    style={{ width: "90px", height: "30px" }}
+                    // onClick={(e) => addRow()}
+                  />
+                }
+              >
+                <InputTextarea
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  autoResize
+                  style={{ minWidth: "100%" }}
+                  rows={12}
+                />
+              </Dialog>
               </div>
             }
-            style={{ width: "95%" }}
-          ></Column>
+            style={{ width: "95%" }}          >
+              
+            </Column>
           <Column
             className="p-1 "
             header="Correct"
@@ -126,7 +157,9 @@ function Questions() {
 
   const header = (
     <div className="flex flex-wrap justify-content-between align-items-center gap-2">
-      <span>Exam Name</span>
+      <span>
+        <h1>Exam Name</h1>
+      </span>
       <div>
         <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} text />
         <Button
@@ -160,7 +193,7 @@ function Questions() {
         size="small"
         severity="secondary"
         style={{ width: "90px" }}
-        onClick={(e) => editRow(rowData)}
+        // onClick={(e) => editRow(rowData)}
       />
       <Button
         label="Delete"
@@ -170,53 +203,48 @@ function Questions() {
         size="small"
         severity="danger"
         style={{ width: "90px" }}
-        onClick={(e) => deleteRow(rowData)}
+        // onClick={(e) => deleteRow(rowData)}
       />
     </div>
   );
 
-
   //FOR IMAGE POPUP
 
   const [visibleImagePopup, setVisible] = useState(false);
-
-  //FOR Cute popup
-  const todoToast = (item) =>
-    toast.current.show({
-      severity: "info",
-      summary: "Info",
-      detail: `editRow: ${!!item ? JSON.stringify(item) : "empty"}`,
-    });
 
   //Checkbox
 
   const [checked, setChecked] = useState(false);
 
   //TO be implemented
-  const [editRow, deleteRow, addRow] = [todoToast, todoToast, todoToast];
+  //const [editRow, deleteRow, addRow] = [todoToast, todoToast, todoToast];
 
-    //Expand answers list
+  //Expand answers list
   const toggleAnswer = (rowData) => {
     if (getExpandedRows().includes(rowData.id)) {
       setExpandedRows(null);
       return;
     }
 
-    const _expandedRow = {[rowData.id]: true};
+    const _expandedRow = { [rowData.id]: true };
 
     setExpandedRows(_expandedRow);
   };
 
-  
   const getExpandedRows = () => {
     if (!expandedRows) {
       return [];
     }
 
     return Object.entries(expandedRows)
-                 .filter(([_, value]) => value)
-                 .map(([key, _]) => key);
+      .filter(([_, value]) => value)
+      .map(([key, _]) => key);
   };
+
+  //for text input
+  const [dialogVisible, setDialogVisible] = useState(false);
+  const [value, setValue] = useState("");
+  const [dialogVisibleasAnswers, setDialogVisibleAnswers] = useState(false);
 
   return (
     <div className="card">
@@ -234,8 +262,10 @@ function Questions() {
         <Column
           field="name"
           header={
-            <div className="flex align-items-center gap-2">
-              <span>Question</span>
+            <div className="flex align-items-center gap-2 ">
+              <span>
+                <h2>Question</h2>
+              </span>
               <Button
                 label="Add"
                 tooltip="Add a Question"
@@ -243,10 +273,38 @@ function Questions() {
                 size="small"
                 severity="success"
                 style={{ width: "90px", height: "30px" }}
-                onClick={(e) => addRow()}
+                // onClick={(e) => addRow()}
+                onClick={() => setDialogVisible(true)}
               />
+              <Dialog
+                header="Add new Question"
+                visible={dialogVisible}
+                style={{ width: "75vw" }}
+                contentStyle={{ height: "305px" }}
+                onHide={() => setDialogVisible(false)}
+                footer={
+                  <Button
+                    label="Save"
+                    tooltip="Save the Question"
+                    icon="pi pi-plus"
+                    size="small"
+                    severity="success"
+                    style={{ width: "90px", height: "30px" }}
+                    // onClick={(e) => addRow()}
+                  />
+                }
+              >
+                <InputTextarea
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  autoResize
+                  style={{ minWidth: "100%" }}
+                  rows={12}
+                />
+              </Dialog>
             </div>
           }
+          className="text-lg"
         />
         <Column
           header="Image"
@@ -258,7 +316,21 @@ function Questions() {
       </DataTable>
       {/* POPUP Image element */}
       <Dialog
-        header="Image"
+        header={
+          <div className="flex align-items-center gap-2">
+            <span>Image</span>
+            <Button
+              label="Delete"
+              tooltip="Delete Image"
+              tooltipOptions={{ position: "top" }}
+              icon="pi pi-trash"
+              size="small"
+              severity="danger"
+              style={{ width: "90px" }}
+              // onClick={(e) => deleteRow(rowData)}
+            />
+          </div>
+        }
         visible={visibleImagePopup}
         dismissableMask={true}
         maximizable
