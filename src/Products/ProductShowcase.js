@@ -3,8 +3,8 @@ import axios from 'axios';
 import './ProductShowcase.css';
 import PaymentForm from "./Popup";
 import 'primereact/resources/themes/nova/theme.css';
-import { Button } from 'primereact/button';
-import { Carousel } from 'primereact/carousel';
+import {Button} from 'primereact/button';
+import {Carousel} from 'primereact/carousel';
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import NodeJSPic from "../Pics/NodeJSPic.webp";
@@ -13,8 +13,8 @@ import ReactPic from "../Pics/ReactPic.webp";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTag} from "@fortawesome/free-solid-svg-icons";
 import {Card} from "primereact/card";
-import{Toast} from "primereact/toast";
-
+import {Toast} from "primereact/toast";
+import LandingPage from "../Pics/LandingPage.jpg";
 
 
 const images = {
@@ -48,14 +48,14 @@ const ProductShowcase = () => {
     ];
     const Product = ({title, image, description, price, Purchase, isPurchased}) => {
         const selectedImage = images[image];
-        const header = ( <img alt="Card" src={selectedImage}/> );
+        const header = (<img alt="Card" src={selectedImage}/>);
         const footer = (
             <>
                 {!isPurchased
                     ?
-                    (<Button className="Rounded"   onClick={Purchase} label="Purchase" severity="success"  ></Button>)
+                    (<Button className="Rounded" onClick={Purchase} label="Purchase" severity="success"></Button>)
                     :
-                    <Button className="Rounded" label="Purchased" severity="danger"  disabled></Button>
+                    <Button className="Rounded" label="Purchased" severity="danger" disabled></Button>
                 }
             </>
         );
@@ -71,17 +71,13 @@ const ProductShowcase = () => {
     const productTemplate = (product) => {
         const selectedImage = images[product.Image];
         return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3 ">
                 <div className="mb-3">
-                    <img src={selectedImage} alt={product.Title} className="w-6 shadow-2" />
+                    <img src={selectedImage} alt={product.Title} className="w-6 shadow-2"/>
                 </div>
                 <div>
                     <h4 className="mb-1">{product.Title}</h4>
                     <h6 className="mt-0 mb-3">${product.Price}</h6>
-                    <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-                        <Button icon="pi pi-search" className="p-button p-button-rounded" />
-                        <Button  className="p-button-success p-button-rounded" ><FontAwesomeIcon icon={faTag} /></Button>
-                    </div>
                 </div>
             </div>
         );
@@ -104,55 +100,50 @@ const ProductShowcase = () => {
     const purchaseHandler = (product) => {
         setSelectedProduct(product);
         setShowPopup(true);
-
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth' // Optional - smooth scrolling animation
-            });
     };
 
     const handlePurchaseSubmit = () => {
         setShowPopup(false);
-        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Purchase successful', life: 3000 });
+        toast.current.show({severity: 'success', summary: 'Successful', detail: 'Purchase successful', life: 3000});
 
     };
 
+
+
+
+
     return (<>
-        <Toast ref={toast} />
-        <div className="product-showcase">
-            <h2>Featured Products</h2>
-            <div className="card">
-                <Carousel value={products} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions} className="custom-carousel" circular
-                          autoplayInterval={7000} itemTemplate={productTemplate} />
-            </div>
+            <Toast ref={toast}/>
 
-            <div className="products">
-                {productData.map((product) => (
-                    <div key={product.ExamID}>
-                        <Product
-                            key={product.ExamID}
-                            title={product.Title}
-                            image={product.Image}
-                            description={product.Description}
-                            price={product.Price}
-                            Purchase={() => purchaseHandler(product)}
-                            isPurchased={product.IsPurchased}
-                        />
-                    </div>
-                ))}
-            </div>
+            <div className="product-showcase BackgroundColor">
+                <h2>Featured Products</h2>
+                <div className="products">
+                    {productData.map((product) => (
+                        <div key={product.ExamID}>
+                            <Product
+                                key={product.ExamID}
+                                title={product.Title}
+                                image={product.Image}
+                                description={product.Description}
+                                price={product.Price}
+                                Purchase={() => purchaseHandler(product)}
+                                isPurchased={product.IsPurchased}
+                            />
+                        </div>
+                    ))}
+                </div>
 
-            {showPopup && (
+                {showPopup && (
                     <div className="popup">
                     <span className="close Bckgrnd-Clr" onClick={() => setShowPopup(false)}>
                         &times;
                     </span>
-                        <PaymentForm TheProduct={selectedProduct} handlePurchaseSubmit={handlePurchaseSubmit} />
+                        <PaymentForm TheProduct={selectedProduct} handlePurchaseSubmit={handlePurchaseSubmit}/>
 
                     </div>
 
-            )}
-        </div>
+                )}
+            </div>
         </>
     );
 };

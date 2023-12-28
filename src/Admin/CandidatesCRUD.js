@@ -65,7 +65,7 @@ export default function CandidatesDemo() {
     const [submitted, setSubmitted] = useState(false);
     const toast = useRef(null);
     const dt = useRef(null);
-
+    const [showPass, setShowPass] = useState(false);
 
     useEffect(() => {
         const fetchCandidateData = async () => {
@@ -132,6 +132,7 @@ export default function CandidatesDemo() {
         dt.current.exportCSV();
     };
     const openNew = () => {
+        setShowPass(true);
         setCandidate(emptyCandidate);
         setSubmitted(false);
         setCandidateDialog(true);
@@ -205,6 +206,7 @@ export default function CandidatesDemo() {
         );
     };
     const editCandidate = (Candidate) => {
+        setShowPass(false);
         setCandidate({ ...Candidate });
         setCandidateDialog(true);
     };
@@ -221,6 +223,7 @@ export default function CandidatesDemo() {
                 <Toolbar className="mb-4" start={leftToolbarTemplate} end={rightToolbarTemplate}></Toolbar>
 
                 <DataTable
+
                     ref={dt}
                     value={Candidates}
                     selection={selectedCandidates}
@@ -269,13 +272,15 @@ export default function CandidatesDemo() {
                     <InputText id="UserName"  value={Candidate.UserName} onChange={(e) => onInputChange(e, 'UserName')} required autoFocus className={classNames({ 'p-invalid': submitted && !Candidate.UserName })} />
                     {submitted && !Candidate.UserName && <small className="p-error">UserName is required.</small>}
                 </div>
-                <div className="field">
+                {showPass && (<div className="field">
                     <label htmlFor="Password" className="font-bold">
                         Password
                     </label>
-                    <Password  toggleMask id="Password" value={Candidate.Password} onChange={(e) => onInputChange(e, 'Password')} required  className={classNames({ 'p-invalid': submitted && !Candidate.Password })} />
+                    <Password toggleMask id="Password" value={Candidate.Password}
+                              onChange={(e) => onInputChange(e, 'Password')} required
+                              className={classNames({'p-invalid': submitted && !Candidate.Password})}/>
                     {submitted && !Candidate.Password && <small className="p-error">Password is required.</small>}
-                </div>
+                </div>)}
                 <div className="field">
                     <label htmlFor="FirstName" className="font-bold">
                         Firstname

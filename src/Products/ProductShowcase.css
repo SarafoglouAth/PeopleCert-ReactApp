@@ -1,7 +1,6 @@
 /* productShowcase.css */
 .product-showcase {
     padding: 20px;
-    background-color: #f9f9f9;
 }
 
 .products {
@@ -9,6 +8,9 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted for 2 products per row */
     grid-gap: 20px;
 
+}
+.BackgroundColor{
+    background-color: rgba(184, 245, 255, 0.23);
 }
 
 .product.hidden {
@@ -44,7 +46,7 @@
 }
 
 .popup {
-    position: absolute; /* Change from fixed to absolute */
+    position: fixed; /* Change from fixed to absolute */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -62,5 +64,3 @@
     background-color: #6EB0E0FF;
     border-radius: 50%;
 }
-
-

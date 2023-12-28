@@ -1,0 +1,632 @@
+[
+    {
+        "ID": 1,
+        "CandidateID": "8",
+        "FirstName": "Fredrick",
+        "MiddleName": "Hank",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Crist",
+        "CandidateExamsID": "2894",
+        "PercentageScore": "06",
+        "AssessmentTestCode": "935",
+        "Title":"React basic"
+    },
+    {
+        "ID": 2,
+        "CandidateID": "8",
+        "FirstName": "Kristine",
+        "MiddleName": "Caprice",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Balistreri",
+        "CandidateExamsID": "2739",
+        "PercentageScore": "72",
+        "AssessmentTestCode": "441",
+        "Title":"Angular basic"
+    },
+    {
+        "ID": 3,
+        "CandidateID": "9",
+        "FirstName": "Terry",
+        "MiddleName": "Ellis",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Bashirian",
+        "CandidateExamsID": "5434",
+        "PercentageScore": "05",
+        "AssessmentTestCode": "405",
+       "Title":"Angular basic"
+    },
+    {
+        "ID": 4,
+        "CandidateID": "7",
+        "FirstName": "Clifford",
+        "MiddleName": "Lennon",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Abernathy",
+        "CandidateExamsID": "9177",
+        "PercentageScore": "96",
+        "AssessmentTestCode": "878",
+        "Title":"React basic"
+    },
+    {
+        "ID": 5,
+        "CandidateID": "5",
+        "FirstName": "Louis",
+        "MiddleName": "William",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Runolfsdottir",
+        "CandidateExamsID": "5479",
+        "PercentageScore": "97",
+        "AssessmentTestCode": "420",
+        "Title":"Node pro"
+    },
+    {
+        "ID": 6,
+        "CandidateID": "7",
+        "FirstName": "Andrew",
+        "MiddleName": "Jude",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Medhurst",
+        "CandidateExamsID": "4182",
+        "PercentageScore": "17",
+        "AssessmentTestCode": "764",
+         "Title":"React pro"
+    },
+    {
+        "ID": 7,
+        "CandidateID": "7",
+        "FirstName": "Joan",
+        "MiddleName": "Justice",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Bergnaum",
+        "CandidateExamsID": "8746",
+        "PercentageScore": "89",
+        "AssessmentTestCode": "142",
+        "Title":"Angular pro"
+    },
+    {
+        "ID": 8,
+        "CandidateID": "9",
+        "FirstName": "Alexander",
+        "MiddleName": "Theo",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Pacocha",
+        "CandidateExamsID": "9363",
+        "PercentageScore": "25",
+        "AssessmentTestCode": "229",
+        "Title":"Node basic"
+    },
+    {
+        "ID": 9,
+        "CandidateID": "2",
+        "FirstName": "Nellie",
+        "MiddleName": "Raye",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Hayes",
+        "CandidateExamsID": "4595",
+        "PercentageScore": "42",
+        "AssessmentTestCode": "672",
+        "Title":"Node basic"
+    },
+    {
+        "ID": 10,
+        "CandidateID": "0",
+        "FirstName": "Sheryl",
+        "MiddleName": "Juliet",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Murphy",
+        "CandidateExamsID": "7085",
+        "PercentageScore": "66",
+        "AssessmentTestCode": "355",
+        "Title":"Node pro"
+    },
+    {
+        "ID": 11,
+        "CandidateID": "8",
+        "FirstName": "Joshua",
+        "MiddleName": "Dior",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Ullrich",
+        "CandidateExamsID": "5027",
+        "PercentageScore": "86",
+        "AssessmentTestCode": "216",
+        "Title":"React pro"
+    },
+    {
+        "ID": 12,
+        "CandidateID": "0",
+        "FirstName": "Jon",
+        "MiddleName": "Hugh",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Jaskolski",
+        "CandidateExamsID": "4244",
+        "PercentageScore": "05",
+        "AssessmentTestCode": "246",
+        "Title":"Angular pro"
+    },
+    {
+        "ID": 13,
+        "CandidateID": "8",
+        "FirstName": "Oliver",
+        "MiddleName": "Karsyn",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Weissnat",
+        "CandidateExamsID": "7362",
+        "PercentageScore": "18",
+        "AssessmentTestCode": "710",
+        "Title":"Angular basic"
+    },
+    {
+        "ID": 14,
+        "CandidateID": "1",
+        "FirstName": "Carl",
+        "MiddleName": "Ellis",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Schulist",
+        "CandidateExamsID": "5698",
+        "PercentageScore": "21",
+        "AssessmentTestCode": "415",
+        "Title":"React basic"
+    },
+    {
+        "ID": 15,
+        "CandidateID": "9",
+        "FirstName": "Tanya",
+        "MiddleName": "Marie",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Rosenbaum",
+        "CandidateExamsID": "7385",
+        "PercentageScore": "15",
+        "AssessmentTestCode": "688",
+        "Title":"Node pro"
+    },
+    {
+        "ID": 16,
+        "CandidateID": "7",
+        "FirstName": "Norman",
+        "MiddleName": "Hendrix",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Hansen",
+        "CandidateExamsID": "7108",
+        "PercentageScore": "92",
+        "AssessmentTestCode": "867" ,
+        "Title":"Angular pro"
+    },
+    {
+        "ID": 17,
+        "CandidateID": "1",
+        "FirstName": "Erick",
+        "MiddleName": "Teddy",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Hirthe",
+        "CandidateExamsID": "0252",
+        "PercentageScore": "43",
+        "AssessmentTestCode": "005",
+        "Title":"Angular basic"
+    },
+    {
+        "ID": 18,
+        "CandidateID": "3",
+        "FirstName": "Kathy",
+        "MiddleName": "Blanche",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Rohan",
+        "CandidateExamsID": "4043",
+        "PercentageScore": "87",
+        "AssessmentTestCode": "501",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 19,
+        "CandidateID": "3",
+        "FirstName": "Marcus",
+        "MiddleName": "Sonny",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Schulist",
+        "CandidateExamsID": "2090",
+        "PercentageScore": "09",
+        "AssessmentTestCode": "542",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 20,
+        "CandidateID": "5",
+        "FirstName": "Alfonso",
+        "MiddleName": "Ezra",
+         "CertificationDate": "2019-01-01",
+        "LastName": "O'Hara",
+        "CandidateExamsID": "8758",
+        "PercentageScore": "77",
+        "AssessmentTestCode": "891",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 21,
+        "CandidateID": "0",
+        "FirstName": "Daisy",
+        "MiddleName": "Frida",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Aufderhar",
+        "CandidateExamsID": "9960",
+        "PercentageScore": "49",
+        "AssessmentTestCode": "046",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 22,
+        "CandidateID": "1",
+        "FirstName": "Walter",
+        "MiddleName": "Ethan",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Labadie",
+        "CandidateExamsID": "3915",
+        "PercentageScore": "53",
+        "AssessmentTestCode": "954",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 23,
+        "CandidateID": "1",
+        "FirstName": "Lena",
+        "MiddleName": "Maybel",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Goldner",
+        "CandidateExamsID": "2708",
+        "PercentageScore": "10",
+        "AssessmentTestCode": "242",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 24,
+        "CandidateID": "1",
+        "FirstName": "Norman",
+        "MiddleName": "Luke",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Fisher",
+        "CandidateExamsID": "2034",
+        "PercentageScore": "83",
+        "AssessmentTestCode": "356",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 25,
+        "CandidateID": "1",
+        "FirstName": "Jake",
+        "MiddleName": "Lucas",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Hartmann",
+        "CandidateExamsID": "5024",
+        "PercentageScore": "92",
+        "AssessmentTestCode": "024",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 26,
+        "CandidateID": "2",
+        "FirstName": "Bradley",
+        "MiddleName": "Otto",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Sipes",
+        "CandidateExamsID": "3709",
+        "PercentageScore": "05",
+        "AssessmentTestCode": "558",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 27,
+        "CandidateID": "5",
+        "FirstName": "Eula",
+        "MiddleName": "Jess",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Bayer",
+        "CandidateExamsID": "5086",
+        "PercentageScore": "10",
+        "AssessmentTestCode": "315",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 28,
+        "CandidateID": "7",
+        "FirstName": "Phil",
+        "MiddleName": "Jayden",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Greenfelder",
+        "CandidateExamsID": "3118",
+        "PercentageScore": "24",
+        "AssessmentTestCode": "580",
+                                           "Title":"Angular basic"
+
+    },
+    {
+        "ID": 29,
+        "CandidateID": "8",
+        "FirstName": "Louise",
+        "MiddleName": "Matilda",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Wisozk",
+        "CandidateExamsID": "8944",
+        "PercentageScore": "66",
+        "AssessmentTestCode": "363",
+        "Title":"Angular basic"
+    },
+    {
+        "ID": 30,
+        "CandidateID": "0",
+        "FirstName": "Colleen",
+        "MiddleName": "Morgan",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Konopelski",
+        "CandidateExamsID": "1391",
+        "PercentageScore": "20",
+        "AssessmentTestCode": "574",
+        "Title":"React basic"
+    },
+    {
+        "ID": 31,
+        "CandidateID": "3",
+        "FirstName": "Felix",
+        "MiddleName": "Thomas",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Mills",
+        "CandidateExamsID": "8686",
+        "PercentageScore": "72",
+        "AssessmentTestCode": "684",
+        "Title":"React basic"
+    },
+    {
+        "ID": 32,
+        "CandidateID": "8",
+        "FirstName": "Nathan",
+        "MiddleName": "Beckham",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Schmeler",
+        "CandidateExamsID": "6348",
+        "PercentageScore": "35",
+        "AssessmentTestCode": "907",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 33,
+        "CandidateID": "9",
+        "FirstName": "Lonnie",
+        "MiddleName": "Julian",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Klocko",
+        "CandidateExamsID": "5569",
+        "PercentageScore": "34",
+        "AssessmentTestCode": "911",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 34,
+        "CandidateID": "7",
+        "FirstName": "Mae",
+        "MiddleName": "Clementine",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Schmeler",
+        "CandidateExamsID": "1719",
+        "PercentageScore": "90",
+        "AssessmentTestCode": "818",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 35,
+        "CandidateID": "7",
+        "FirstName": "Russell",
+        "MiddleName": "Joseph",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Muller",
+        "CandidateExamsID": "9629",
+        "PercentageScore": "08",
+        "AssessmentTestCode": "518",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 36,
+        "CandidateID": "9",
+        "FirstName": "Cindy",
+        "MiddleName": "Quinn",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Tillman",
+        "CandidateExamsID": "1615",
+        "PercentageScore": "07",
+        "AssessmentTestCode": "628",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 37,
+        "CandidateID": "7",
+        "FirstName": "Conrad",
+        "MiddleName": "Jackson",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Koepp",
+        "CandidateExamsID": "6782",
+        "PercentageScore": "13",
+        "AssessmentTestCode": "910",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 38,
+        "CandidateID": "7",
+        "FirstName": "Gilberto",
+        "MiddleName": "Otis",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Stark",
+        "CandidateExamsID": "8924",
+        "PercentageScore": "56",
+        "AssessmentTestCode": "640",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 39,
+        "CandidateID": "0",
+        "FirstName": "Bessie",
+        "MiddleName": "Sophia",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Beer",
+        "CandidateExamsID": "5446",
+        "PercentageScore": "08",
+        "AssessmentTestCode": "521",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 40,
+        "CandidateID": "0",
+        "FirstName": "Kelley",
+        "MiddleName": "Nova",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Halvorson",
+        "CandidateExamsID": "6238",
+        "PercentageScore": "46",
+        "AssessmentTestCode": "264",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 41,
+        "CandidateID": "7",
+        "FirstName": "Duane",
+        "MiddleName": "Fletcher",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Carroll",
+        "CandidateExamsID": "7042",
+        "PercentageScore": "54",
+        "AssessmentTestCode": "073",
+                                           "Title":"React basic"
+
+    },
+    {
+        "ID": 42,
+        "CandidateID": "8",
+        "FirstName": "Martin",
+        "MiddleName": "Wison",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Klocko",
+        "CandidateExamsID": "5951",
+        "PercentageScore": "63",
+        "AssessmentTestCode": "604",
+                                           "Title":"React Pro"
+
+    },
+    {
+        "ID": 43,
+        "CandidateID": "2",
+        "FirstName": "Henrietta",
+        "MiddleName": "Suzanne",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Emard",
+        "CandidateExamsID": "3174",
+        "PercentageScore": "63",
+        "AssessmentTestCode": "242",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 44,
+        "CandidateID": "1",
+        "FirstName": "Dave",
+        "MiddleName": "Henry",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Pagac-Rau",
+        "CandidateExamsID": "5279",
+        "PercentageScore": "95",
+        "AssessmentTestCode": "182",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 45,
+        "CandidateID": "2",
+        "FirstName": "Richard",
+        "MiddleName": "Sebastian",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Beier",
+        "CandidateExamsID": "3911",
+        "PercentageScore": "87",
+        "AssessmentTestCode": "373",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 46,
+        "CandidateID": "8",
+        "FirstName": "Herman",
+        "MiddleName": "Julian",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Waelchi",
+        "CandidateExamsID": "6055",
+        "PercentageScore": "03",
+        "AssessmentTestCode": "794",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 47,
+        "CandidateID": "6",
+        "FirstName": "Mae",
+        "MiddleName": "Aster",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Considine",
+        "CandidateExamsID": "3407",
+        "PercentageScore": "12",
+        "AssessmentTestCode": "857",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 48,
+        "CandidateID": "3",
+        "FirstName": "Tanya",
+        "MiddleName": "Serena",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Runte",
+        "CandidateExamsID": "7748",
+        "PercentageScore": "72",
+        "AssessmentTestCode": "710",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 49,
+        "CandidateID": "8",
+        "FirstName": "Kerry",
+        "MiddleName": "Carter",
+        "LastName": "Little",
+        "CertificationDate": "2019-01-01",
+        "CandidateExamsID": "8019",
+        "PercentageScore": "04",
+        "AssessmentTestCode": "997",
+                                                                              "Title":"React Pro"
+
+    },
+    {
+        "ID": 50,
+        "CandidateID": "1",
+        "FirstName": "Gayle",
+        "MiddleName": "Skylar",
+         "CertificationDate": "2019-01-01",
+        "LastName": "Adams",
+        "CandidateExamsID": "9279",
+        "PercentageScore": "15",
+        "AssessmentTestCode": "009",
+                                                                              "Title":"React Pro"
+
+    }
+]
