@@ -370,6 +370,49 @@ function Questions() {
 
   //admin add questions end
 
+  //admin delete update image start
+
+  const AdminUiImageDeleteUpdateOn = (
+    <div className="flex align-items-center gap-2">
+      <span>Image</span>
+      <Button
+        label="Delete"
+        tooltip="Delete Image"
+        tooltipOptions={{ position: "top" }}
+        icon="pi pi-trash"
+        size="small"
+        severity="danger"
+        style={{ width: "90px" }}
+        // onClick={(e) => deleteRow(rowData)}
+      />
+      <Button
+        label="Update"
+        tooltip="Update Image"
+        tooltipOptions={{ position: "top" }}
+        icon="pi pi-pencil"
+        size="small"
+        severity="secondary"
+        style={{ width: "90px" }}
+        // onClick={(e) => deleteRow(rowData)}
+      />
+    </div>
+  );
+
+  const AdminUiImageDeleteUpdateOff = (
+    <div className="flex align-items-center gap-2">
+      <span>Image</span>
+    </div>
+  );
+
+  function AdminUiImageToggle() {
+    if (admin) {
+      return AdminUiImageDeleteUpdateOn;
+    }
+    return AdminUiImageDeleteUpdateOff;
+  }
+
+  //admin delete update image end
+
   return (
     <div className="card">
       <Button
@@ -412,21 +455,7 @@ function Questions() {
       </DataTable>
       {/* POPUP Image element */}
       <Dialog
-        header={
-          <div className="flex align-items-center gap-2">
-            <span>Image</span>
-            <Button
-              label="Delete"
-              tooltip="Delete Image"
-              tooltipOptions={{ position: "top" }}
-              icon="pi pi-trash"
-              size="small"
-              severity="danger"
-              style={{ width: "90px" }}
-              // onClick={(e) => deleteRow(rowData)}
-            />
-          </div>
-        }
+        header={AdminUiImageToggle}
         visible={visibleImagePopup}
         dismissableMask={true}
         maximizable
