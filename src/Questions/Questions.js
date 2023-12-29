@@ -148,17 +148,17 @@ function Questions() {
 
 
  
-  const rowExpansionTemplate = () => {
+  const rowExpansionTemplate = (question) => { //μου δίνει το row 
     return (
       <div className="p-1">
         <DataTable
-          value={exam.questions}
+          value={question.Answers}            //του λέω που είναι η λίστα που θέλω να μου φτιάξει με βάση το row
           dataKey="id"
           tableStyle={{ minWidth: "5rem" }}
           stripedRows={true}
         >
           <Column
-            field="code"
+            field="text"                      //του λέω από πού να πάρει απο τη λίστα μου τις καταχωρίσεις για κάθε γραμμή
             header={AnswerWithButtons}
             style={{ width: "95%" }}
           ></Column>
@@ -278,11 +278,10 @@ function Questions() {
 
   //Expand answers list
   const toggleAnswer = (rowData) => {
-    if (getExpandedRows().includes(rowData.id)) {
+    if (getExpandedRows().includes(rowData.id.toString())) {
       setExpandedRows(null);
       return;
     }
-
     const _expandedRow = { [rowData.id]: true };
 
     setExpandedRows(_expandedRow);
