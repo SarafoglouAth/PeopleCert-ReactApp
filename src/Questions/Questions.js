@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "./Questions.css";
@@ -9,7 +10,6 @@ import QuestionSampleImage from "../Pics/QuestionSampleImage.jpg";
 import { Checkbox } from "primereact/checkbox";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { ProductService } from "../Service/ProductService";
 import { Button } from "primereact/button";
 import { Toast } from "primereact/toast";
 import { Image } from "primereact/image";
@@ -21,22 +21,34 @@ import { InputTextarea } from "primereact/inputtextarea";
 function Questions() {
   //FOR ROW EXPANSION
 
-  const [products, setProducts] = useState([]);
   const [expandedRows, setExpandedRows] = useState(null);
   const toast = useRef(null);
 
+  //data
+  const [loading, setLoading] = useState(true);
+  const [exam, setExam] = useState(null);
+
+  const url = "https://webhook.site/838df976-7c9a-4d5e-ad3b-b073a78ef81c";
+
   useEffect(() => {
-    ProductService.getProductsWithOrdersSmall().then((data) => {
-      console.log(data);
-      // data[0].name =
-      setProducts(data);
-    });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(url);
+        setExam(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching Certification data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
 
   const expandAll = () => {
     let _expandedRows = {};
 
-    products.forEach((p) => (_expandedRows[`${p.id}`] = true));
+    exam.questions.forEach((p) => (_expandedRows[`${p.id}`] = true));
 
     setExpandedRows(_expandedRows);
   };
@@ -44,12 +56,12 @@ function Questions() {
   const collapseAll = () => {
     setExpandedRows(null);
   };
-  
+
   //for text input
   const [dialogVisible, setDialogVisible] = useState(false);
   const [dialogHeader, setDialogHeader] = useState("");
 
-
+  //for image modal
   const imageBodyTemplate = (rowData) => {
     return (
       <img
@@ -66,41 +78,31 @@ function Questions() {
   const [value, setValue] = useState("");
   const [admin, setAdminValue] = useState(true);
 
-  const AnswerWithoutButtons = (
-    <div className="flex align-items-center gap-2 ">
-      <span>
-        <h4>Answers</h4>
-      </span>
-    </div>
-  );
+  const AnswerWithButtons = () => {
 
-  const AnswerWithButtons = (
-    <div className="flex align-items-center gap-2 ">
-      <span>
-        <h4>Answers</h4>
-      </span>
-      <Button
-        label="Add"
-        tooltip="Add an Answer"
-        icon="pi pi-plus"
-        size="small"
-        severity="success"
-        style={{ width: "90px", height: "35px" }}
-        onClick={() => {
-          setDialogVisible(true);
-          setDialogHeader("Add an Answer");
-        }}
-        // onClick={(e) => addRow()}
-      />
-    </div>
-  );
-
-  function AdminUiAnswerAddButton() {
-    if (admin) {
-      return AnswerWithButtons;
-    }
-    return AnswerWithoutButtons;
-  }
+    return (
+      <div className="flex align-items-center gap-2 ">
+        <span>
+          <h4>Answers</h4>
+        </span>
+        {admin && (
+          <Button
+            label="Add"
+            tooltip="Add an Answer"
+            icon="pi pi-plus"
+            size="small"
+            severity="success"
+            style={{ width: "90px", height: "35px" }}
+            onClick={() => {
+              setDialogVisible(true);
+              setDialogHeader("Add an Answer");
+            }}
+            // onClick={(e) => addRow()}
+          />
+        )}
+      </div>
+    );
+  };
 
   //end of testing
 
@@ -121,6 +123,7 @@ function Questions() {
             onClick={() => {
               setDialogVisible(true);
               setDialogHeader("Update the Answer");
+              setValue("To be implemented");
             }}
           ></Button>
           <Button
@@ -143,18 +146,20 @@ function Questions() {
 
   //admin answer delete update end
 
+
+ 
   const rowExpansionTemplate = () => {
     return (
       <div className="p-1">
         <DataTable
-          value={products}
+          value={exam.questions}
           dataKey="id"
           tableStyle={{ minWidth: "5rem" }}
           stripedRows={true}
         >
           <Column
             field="code"
-            header={AdminUiAnswerAddButton}
+            header={AnswerWithButtons}
             style={{ width: "95%" }}
           ></Column>
           <Column
@@ -177,10 +182,12 @@ function Questions() {
     );
   };
 
+
+
   const header = (
     <div className="flex flex-wrap justify-content-between align-items-center gap-2">
       <span>
-        <h1>Exam Name</h1>
+        <h1>{exam?.testName}</h1>
       </span>
       <div>
         <Button icon="pi pi-plus" label="Expand All" onClick={expandAll} text />
@@ -230,7 +237,7 @@ function Questions() {
         size="small"
         severity="info"
         style={{ width: "90px" }}
-        onClick={(e) => toggleAnswer(rowData)}
+        onClick={() => toggleAnswer(rowData)}
       />
       <Button
         label="Update"
@@ -243,8 +250,8 @@ function Questions() {
         onClick={() => {
           setDialogVisible(true);
           setDialogHeader("Update the Question");
+          setValue("To be implemented");
         }}
-        // onClick={(e) => editRow(rowData)}
       />
       <Button
         label="Delete"
@@ -254,7 +261,6 @@ function Questions() {
         size="small"
         severity="danger"
         style={{ width: "90px" }}
-        // onClick={(e) => deleteRow(rowData)}
       />
     </div>
   );
@@ -294,110 +300,98 @@ function Questions() {
 
   //admin add questions start
 
-  const AdminUiQestionsAddButtonOn = (
-    <div className="flex align-items-center gap-2 ">
-      <span>
-        <h2>Question</h2>
-      </span>
-      <Button
-        label="Add"
-        tooltip="Add a Question"
-        icon="pi pi-plus"
-        size="small"
-        severity="success"
-        style={{ width: "90px", height: "30px" }}
-        // onClick={(e) => addRow()}
-        onClick={() => {
-          setDialogVisible(true);
-          setDialogHeader("Add new Question");
-        }}
-      />
-      <Dialog
-        header={<span> {dialogHeader}</span>}
-        visible={dialogVisible}
-        style={{ width: "75vw" }}
-        contentStyle={{ height: "305px" }}
-        onHide={() => setDialogVisible(false)}
-        footer={
-          <Button
-            label="Save"
-            tooltip="Save the Question"
-            size="small"
-            severity="success"
-            style={{ width: "90px", height: "30px" }}
-            // onClick={(e) => addRow()}
-          />
-        }
-      >
-        <InputTextarea
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          autoResize
-          style={{ minWidth: "100%" }}
-          rows={12}
-        />
-      </Dialog>
-    </div>
-  );
 
-  const AdminUiQestionsAddButtonOff = (
-    <div className="flex align-items-center gap-2 ">
-      <span>
-        <h2>Question</h2>
-      </span>
-    </div>
-  );
+  const AdminUiQestionsAddButtonOn = () => {
 
-  function AdminUiQestionsAddButtonToggle() {
-    if (admin) {
-      return AdminUiQestionsAddButtonOn;
-    }
-    return AdminUiQestionsAddButtonOff;
-  }
+    return (
+      <div className="flex align-items-center gap-2 ">
+        <span>
+          <h2>Question</h2>
+        </span>
+        {admin && (
+          <>
+            {" "}
+            <Button
+              label="Add"
+              tooltip="Add a Question"
+              icon="pi pi-plus"
+              size="small"
+              severity="success"
+              style={{ width: "90px", height: "30px" }}
+              // onClick={(e) => addRow()}
+              onClick={() => {
+                setDialogVisible(true);
+                setDialogHeader("Add new Question");
+              }}
+            />
+            <Dialog
+              header={<span> {dialogHeader}</span>}
+              visible={dialogVisible}
+              style={{ width: "75vw" }}
+              contentStyle={{ height: "305px" }}
+              onHide={() => setDialogVisible(false)}
+              footer={
+                <Button
+                  label="Save"
+                  tooltip="Save the Question"
+                  size="small"
+                  severity="success"
+                  style={{ width: "90px", height: "30px" }}
+                  // onClick={(e) => addRow()}
+                />
+              }
+            >
+              <InputTextarea
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                autoResize
+                style={{ minWidth: "100%" }}
+                rows={12}
+              />
+            </Dialog>{" "}
+          </>
+        )}
+      </div>
+    );
+  };
 
   //admin add questions end
 
   //admin delete update image start
 
-  const AdminUiImageDeleteUpdateOn = (
-    <div className="flex align-items-center gap-2">
-      <span>Image</span>
-      <Button
-        label="Delete"
-        tooltip="Delete Image"
-        tooltipOptions={{ position: "top" }}
-        icon="pi pi-trash"
-        size="small"
-        severity="danger"
-        style={{ width: "90px" }}
-        // onClick={(e) => deleteRow(rowData)}
-      />
-      <Button
-        label="Update"
-        tooltip="Update Image"
-        tooltipOptions={{ position: "top" }}
-        icon="pi pi-pencil"
-        size="small"
-        severity="secondary"
-        style={{ width: "90px" }}
-        // onClick={(e) => deleteRow(rowData)}
-      />
-    </div>
-  );
 
-  const AdminUiImageDeleteUpdateOff = (
-    <div className="flex align-items-center gap-2">
-      <span>Image</span>
-    </div>
-  );
-
-  function AdminUiImageToggle() {
-    if (admin) {
-      return AdminUiImageDeleteUpdateOn;
-    }
-    return AdminUiImageDeleteUpdateOff;
-  }
-
+  const AdminUiImageDeleteUpdateOn = () => {
+    return (
+      <div className="flex align-items-center gap-2">
+        <span>Image</span>
+        {admin && (
+          <>
+            {" "}
+            <Button
+              label="Delete"
+              tooltip="Delete Image"
+              tooltipOptions={{ position: "top" }}
+              icon="pi pi-trash"
+              size="small"
+              severity="danger"
+              style={{ width: "90px" }}
+              // onClick={(e) => deleteRow(rowData)}
+            />
+            <Button
+              label="Update"
+              tooltip="Update Image"
+              tooltipOptions={{ position: "top" }}
+              icon="pi pi-pencil"
+              size="small"
+              severity="secondary"
+              style={{ width: "90px" }}
+              // onClick={(e) => deleteRow(rowData)}
+            />{" "}
+          </>
+        )}
+      </div>
+    );
+  };
   //admin delete update image end
 
   return (
@@ -417,19 +411,26 @@ function Questions() {
         onClick={() => setAdminValue(true)}
       />
       <Toast ref={toast} />
+      {exam===null? "":
+      
+  
       <DataTable
-        value={products}
+        loading={loading}
+        paginator
+        rows={5}
+        rowsPerPageOptions={[5, 10, 25, 50]}
+        value={exam.questions}
         expandedRows={expandedRows}
         onRowToggle={(e) => setExpandedRows(e.data)}
         rowExpansionTemplate={rowExpansionTemplate}
         dataKey="id"
         header={header}
-        tableStyle={{ minWidth: "6rem" }}
+        tableStyle={{ minWidth: "50rem" }}
         stripedRows={true}
       >
         <Column
-          field="name"
-          header={AdminUiQestionsAddButtonToggle}
+          field="questionText"
+          header={AdminUiQestionsAddButtonOn}
           className="text-lg"
         />
         <Column
@@ -439,9 +440,10 @@ function Questions() {
         />
         {AdminUiQuestionsDeleteUpdateButtonsToggle()}
       </DataTable>
+          }
       {/* POPUP Image element */}
       <Dialog
-        header={AdminUiImageToggle}
+        header={AdminUiImageDeleteUpdateOn}
         visible={visibleImagePopup}
         dismissableMask={true}
         maximizable
