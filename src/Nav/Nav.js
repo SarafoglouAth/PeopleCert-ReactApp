@@ -5,6 +5,7 @@ import CandidatesCRUD from "../Admin/CandidatesCRUD";
 import ProductShowcase from "../Products/ProductShowcase"
 import CertificateCRUD  from "../Admin/CertificateCRUD";
 import Tester from "../Admin/Tester";
+import StavrosTest from "../StavrosFiles/StavrosTest";
 export default function Nav() {
 
     return (<div className="Application">
@@ -15,6 +16,7 @@ export default function Nav() {
                         <Link to="/UsersCRUD">UsersCRUD</Link>
                         <Link to="/CertificateCRUD">CertificateCRUD</Link>
                         <Link to="/Tester">Tester</Link>
+                        <Link to="/StavrosTest">StavrosTest</Link>
             </nav>
 
             <Routes>
@@ -23,6 +25,7 @@ export default function Nav() {
                         <Route path="/UsersCRUD" element={<UsersCRUD/>}/>
                         <Route path="/CertificateCRUD" element={<CertificateCRUD/>}/>
                         <Route path="/Tester" element={<Tester/>}/>
+                        <Route path="/StavrosTest" element={<StavrosTest/>}/>
                 <Route path="*" element={<NotFoundPage />} />
 
             </Routes>

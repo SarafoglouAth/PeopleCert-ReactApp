@@ -1,8 +1,7 @@
 import React from "react";
 import { Document, Page, Text, View, Image, PDFDownloadLink, StyleSheet } from '@react-pdf/renderer';
-import CertificateBase from "../Pics/CertificateBase.png";
 import { Button } from "primereact/button";
-
+const CertificateBase = "https://i.ibb.co/5RHBxZ6/Certificate-Base.png";
 // Define styles
 const styles = StyleSheet.create({
     page: {

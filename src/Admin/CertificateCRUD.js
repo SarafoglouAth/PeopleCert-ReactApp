@@ -12,8 +12,9 @@ import { InputText } from 'primereact/inputtext';
 import axios from "axios";
 import Tester from "./Tester";
 
-
+// Component for CRUD operations on certificates
 export default function CertificateCRUD() {
+    // Define initial state and references
     let emptyCertificate = {
         ID: null,
         CandidateID: null,
@@ -38,7 +39,10 @@ export default function CertificateCRUD() {
     const [PreviewCertificateDialog, setPreviewCertificateDialog] = useState(false);
     const [CertificatePrintData, setCertificatePrintData] = useState({ Name: '', Date: '', Course: '', id: ''});
 
+
+    // Fetch certificate data from an API on component mount
     useEffect(() => {
+        // Fetch certificate data from an API
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(url);
@@ -51,7 +55,7 @@ export default function CertificateCRUD() {
 
         fetchUserData();
     }, []);
-
+// Functions for handling dialogs, saving, editing, and deleting certificates
     const openNew = () => {
         setCertificate(emptyCertificate);
         setSubmitted(false);
@@ -61,6 +65,9 @@ export default function CertificateCRUD() {
     const hideDialog = () => {
         setSubmitted(false);
         setCertificateDialog(false);
+    };
+    const hideDialogPreview = () => {
+        setPreviewCertificateDialog(false);
     };
 
     const hideDeleteCertificateDialog = () => {
@@ -81,7 +88,6 @@ export default function CertificateCRUD() {
                 _Certificates[index] = _Certificate;
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Certificate Updated', life: 3000 });
             } else {
-                _Certificate.id = createId();
                 _Certificate.image = 'Certificate-placeholder.svg';
                 _Certificates.push(_Certificate);
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Certificate Created', life: 3000 });
@@ -125,17 +131,7 @@ export default function CertificateCRUD() {
         return index;
     };
 
-    const createId = () => {
-        let id = '';
-        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        return id;
-    };
-
+    // Function to handle CSV export of certificate data
     const exportCSV = () => {
         dt.current.exportCSV();
     };
@@ -171,7 +167,7 @@ export default function CertificateCRUD() {
     };
 
 
-
+    // Function to preview and download a certificate
     function DownloadCertificate(rowData) {
         let Name=rowData.FirstName+" "+rowData.MiddleName+" "+rowData.LastName;
         let Date=rowData.CertificationDate;
@@ -180,7 +176,7 @@ export default function CertificateCRUD() {
         setCertificatePrintData({ Name, Date, Course, id });
         setPreviewCertificateDialog(true);
     }
-
+    // Template for action buttons in the DataTable
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
@@ -192,7 +188,7 @@ export default function CertificateCRUD() {
     };
     const PreviewCertificateDialogFooter  = (
         <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
+            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialogPreview} />
         </React.Fragment>
     );
     const CertificateDialogFooter = (
@@ -208,7 +204,7 @@ export default function CertificateCRUD() {
         </React.Fragment>
     );
 
-
+    // Render the component with the DataTable and Dialogs
     return (
         <div>
             <Toast ref={toast} />

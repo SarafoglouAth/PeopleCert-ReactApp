@@ -1,94 +1,65 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './ProductShowcase.css';
 import PaymentForm from "./Popup";
 import 'primereact/resources/themes/nova/theme.css';
-import {Button} from 'primereact/button';
-import {Carousel} from 'primereact/carousel';
+import { Button } from 'primereact/button';
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import NodeJSPic from "../Pics/NodeJSPic.webp";
-import AngularPic from "../Pics/AngularPic.webp";
-import ReactPic from "../Pics/ReactPic.webp";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTag} from "@fortawesome/free-solid-svg-icons";
-import {Card} from "primereact/card";
-import {Toast} from "primereact/toast";
-import LandingPage from "../Pics/LandingPage.jpg";
+import { Card } from "primereact/card";
+import { Toast } from "primereact/toast";
 
+// URLs for product images
+const ReactPic = "https://i.ibb.co/w6jL8Bp/ReactPic.webp";
+const NodeJSPic = "https://i.ibb.co/FY4LXg4/Node-JSPic.webp";
+const AngularPic = "https://i.ibb.co/9cvQ5YX/Angular-Pic.webp";
 
+// Object containing image URLs
 const images = {
     NodeJSPic,
     AngularPic,
     ReactPic,
 };
-const ProductShowcase = () => {
-    const [showPopup, setShowPopup] = useState(false);
-    const toast = useRef(null);
-    const [productData, setProductData] = useState([]);
-    const [products, setProducts] = useState([])
-    const [selectedProduct, setSelectedProduct] = useState(null);
 
-    const responsiveOptions = [
-        {
-            breakpoint: '1199px',
-            numVisible: 1,
-            numScroll: 1
-        },
-        {
-            breakpoint: '991px',
-            numVisible: 2,
-            numScroll: 1
-        },
-        {
-            breakpoint: '767px',
-            numVisible: 1,
-            numScroll: 1
-        }
-    ];
-    const Product = ({title, image, description, price, Purchase, isPurchased}) => {
-        const selectedImage = images[image];
-        const header = (<img alt="Card" src={selectedImage}/>);
+// Component responsible for showcasing products
+const ProductShowcase = () => {
+    // State variables
+    const [showPopup, setShowPopup] = useState(false); // Toggle the Payment Form popup
+    const toast = useRef(null); // Reference for toast messages
+    const [productData, setProductData] = useState([]); // State for product data
+    const [selectedProduct, setSelectedProduct] = useState(null); // State for the selected product
+
+    // Individual product component
+    const Product = ({ title, image, description, price, Purchase, isPurchased }) => {
+        const selectedImage = images[image]; // Get the selected product's image URL
+        const header = (<img alt="Card" src={selectedImage} />); // Header for the product card
         const footer = (
             <>
+                {/* Conditional rendering of Purchase or Purchased button */}
                 {!isPurchased
-                    ?
-                    (<Button className="Rounded" onClick={Purchase} label="Purchase" severity="success"></Button>)
-                    :
-                    <Button className="Rounded" label="Purchased" severity="danger" disabled></Button>
+                    ? (<Button className="Rounded" onClick={Purchase} label="Purchase" severity="success"></Button>)
+                    : <Button className="Rounded" label="Purchased" severity="danger" disabled></Button>
                 }
             </>
         );
 
-        return (<>
+        // Return the card component displaying product details
+        return (
+            <>
                 <Card title={title} footer={footer} header={header} className="TxtAlCntr">
                     <p className="m-0">{description}</p>
                     <h5 className="m-0">Price: ${price}</h5>
-                </Card></>
+                </Card>
+            </>
         );
     };
 
-    const productTemplate = (product) => {
-        const selectedImage = images[product.Image];
-        return (
-            <div className="border-1 surface-border border-round m-2 text-center py-5 px-3 ">
-                <div className="mb-3">
-                    <img src={selectedImage} alt={product.Title} className="w-6 shadow-2"/>
-                </div>
-                <div>
-                    <h4 className="mb-1">{product.Title}</h4>
-                    <h6 className="mt-0 mb-3">${product.Price}</h6>
-                </div>
-            </div>
-        );
-    };
-
+    // Fetch product data from an API on component mount
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const response = await axios.get('https://api.mocki.io/v2/1e376031/ProductsEshop');
-                setProductData(response.data);
-                setProducts(response.data);
+                setProductData(response.data); // Set the fetched product data in state
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -97,27 +68,27 @@ const ProductShowcase = () => {
         fetchUserData();
     }, []);
 
+    // Handler for purchasing a product
     const purchaseHandler = (product) => {
-        setSelectedProduct(product);
-        setShowPopup(true);
+        setSelectedProduct(product); // Set the selected product in state
+        setShowPopup(true); // Show the payment form popup
     };
 
+    // Handler for submitting a purchase
     const handlePurchaseSubmit = () => {
-        setShowPopup(false);
-        toast.current.show({severity: 'success', summary: 'Successful', detail: 'Purchase successful', life: 3000});
-
+        setShowPopup(false); // Close the payment form popup
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Purchase successful', life: 3000 }); // Show a success toast message
     };
 
-
-
-
-
-    return (<>
-            <Toast ref={toast}/>
+    // Render the product showcase
+    return (
+        <>
+            <Toast ref={toast} /> {/* Toast component for displaying messages */}
 
             <div className="product-showcase BackgroundColor">
                 <h2>Featured Products</h2>
                 <div className="products">
+                    {/* Map through product data to render individual Product components */}
                     {productData.map((product) => (
                         <div key={product.ExamID}>
                             <Product
@@ -133,15 +104,15 @@ const ProductShowcase = () => {
                     ))}
                 </div>
 
+                {/* Render payment form popup if showPopup is true */}
                 {showPopup && (
                     <div className="popup">
-                    <span className="close Bckgrnd-Clr" onClick={() => setShowPopup(false)}>
-                        &times;
-                    </span>
-                        <PaymentForm TheProduct={selectedProduct} handlePurchaseSubmit={handlePurchaseSubmit}/>
-
+                        <span className="close Bckgrnd-Clr" onClick={() => setShowPopup(false)}>
+                            &times;
+                        </span>
+                        {/* Pass selected product and submit handler to PaymentForm component */}
+                        <PaymentForm TheProduct={selectedProduct} handlePurchaseSubmit={handlePurchaseSubmit} />
                     </div>
-
                 )}
             </div>
         </>

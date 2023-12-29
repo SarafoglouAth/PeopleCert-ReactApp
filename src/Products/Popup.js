@@ -1,11 +1,9 @@
 import React, {useRef, useState} from 'react';
 import './Popup.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NodeJSPic from "../Pics/NodeJSPic.webp";
-import AngularPic from "../Pics/AngularPic.webp";
-import ReactPic from "../Pics/ReactPic.webp";
-
-
+const  ReactPic="https://i.ibb.co/w6jL8Bp/ReactPic.webp";
+const  NodeJSPic="https://i.ibb.co/FY4LXg4/Node-JSPic.webp";
+const  AngularPic="https://i.ibb.co/9cvQ5YX/Angular-Pic.webp";
 const images = {
     NodeJSPic,
     AngularPic,
