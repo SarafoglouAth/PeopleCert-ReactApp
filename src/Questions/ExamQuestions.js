@@ -4,6 +4,9 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 
+import {ConfirmDialog} from 'primereact/confirmdialog';
+import {confirmDialog} from 'primereact/confirmdialog';
+
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import {Button} from "primereact/button";
@@ -30,10 +33,16 @@ function ExamQuestions() {
     const [imagePopup, setImagePopup] = useState('');
     const [visibleImagePopup, setVisibleImagePopup] = useState(false);
 
-    const [dialogVisible, setDialogVisible] = useState(false);
-    const [dialogHeader, setDialogHeader] = useState("");
+    // const [questionEditorVisible, setQuestionEditorVisible] = useState(false);
+    // const [questionEditorHeader, setQuestionEditorHeader] = useState("");
+    const [questionEditor, setQuestionEditor] = useState({
+        visible: false,
+        header: '',
+        value: '',
+        isAdd: false,
+        questionId: null
+    });
 
-    const [textInputValue, setTextInputTextInputValue] = useState("");
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -91,6 +100,38 @@ function ExamQuestions() {
         );
     };
 
+    function showQuestionEditor(isAdd, value, questionId) {
+        setQuestionEditor(
+            {
+                ...questionEditor,
+                visible: true,
+                isAdd: isAdd,
+                header: isAdd ? "Add new Question" : "Update Question",
+                value: value ?? '',
+                questionId: questionId
+            }
+        );
+    }
+
+    const upsertQuestion = () => {
+        //TODO: implement
+        console.log(`Question Update not implemented yet, would update questionId: ${questionEditor}`, questionEditor);
+        if (questionEditor.isAdd) {
+            axios.post('https://backend.yes/AddQuestion', {
+                examId: 'TODO: examId',
+                questionText: questionEditor.value
+            })
+                .then(successResponse => console.log(successResponse))
+                .catch(errorResponse => console.error(errorResponse));
+        } else {
+            axios.put(`https://backend.yes/UpdateQuestion/${questionEditor.questionId}`, {
+                questionText: questionEditor.value
+            })
+                .then(successResponse => console.log(successResponse))
+                .catch(errorResponse => console.error(errorResponse));
+        }
+    }
+
     const questionTextColumnHeader = () => {
         return (
             <div className="flex align-items-center gap-2 ">
@@ -108,17 +149,14 @@ function ExamQuestions() {
                             severity="success"
                             style={{width: "90px", height: "30px"}}
                             // onClick={(e) => addRow()}
-                            onClick={() => {
-                                setDialogVisible(true);
-                                setDialogHeader("Add new Question");
-                            }}
+                            onClick={() => showQuestionEditor(true, undefined, null)}
                         />
                         <Dialog
-                            header={<span> {dialogHeader}</span>}
-                            visible={dialogVisible}
+                            header={<span> {questionEditor.header}</span>}
+                            visible={questionEditor.visible}
                             style={{width: "75vw"}}
                             contentStyle={{height: "305px"}}
-                            onHide={() => setDialogVisible(false)}
+                            onHide={() => setQuestionEditor({...questionEditor, visible: false})}
                             footer={
                                 <Button
                                     label="Save"
@@ -126,15 +164,18 @@ function ExamQuestions() {
                                     size="small"
                                     severity="success"
                                     style={{width: "90px", height: "30px"}}
-                                    // onClick={(e) => addRow()}
+                                    onClick={() => upsertQuestion()}
                                 />
                             }
                         >
                             <InputTextarea
-                                value={textInputValue}
-                                onChange={(e) => setTextInputTextInputValue(e.target.value)}
+                                value={questionEditor.value}
+                                onChange={(e) =>
+                                    setQuestionEditor({...questionEditor, value: e.target.value})
+                                }
                                 autoResize
                                 style={{minWidth: "100%"}}
+                                placeholder={'Type Question Text'}
                                 rows={12}
                             />
                         </Dialog>{" "}
@@ -179,6 +220,15 @@ function ExamQuestions() {
             .map(([key, _]) => key);
     };
     //  TODO: refactor into single method
+
+    const acceptQuestionDeletion = (questionId) => {
+        //TODO: implement
+        console.log(`Question Deletion not implemented yet, would delete questionId: ${questionId}`);
+        axios.delete(`https://backend.yes/deleteQuestion/${questionId}`)
+            .then(successResponse => console.log(successResponse))
+            .catch(errorResponse => console.error(errorResponse));
+    }
+
     const questionButtons = (rowData) => (
         <div className="flex flex-column justify-content-center align-items-center gap-1">
             <Button
@@ -200,11 +250,7 @@ function ExamQuestions() {
                 size="small"
                 severity="secondary"
                 style={{width: "90px"}}
-                onClick={() => {
-                    setDialogVisible(true);
-                    setDialogHeader("Update the Question");
-                    setTextInputTextInputValue("To be implemented");
-                }}
+                onClick={() => showQuestionEditor(false, rowData.questionText, rowData.id)}
             />
             <Button
                 label="Delete"
@@ -214,6 +260,15 @@ function ExamQuestions() {
                 size="small"
                 severity="danger"
                 style={{width: "90px"}}
+                onClick={() => {
+                    confirmDialog({
+                        message: 'Do you want to delete this Question?',
+                        header: 'Delete Confirmation',
+                        icon: 'pi pi-info-circle',
+                        acceptClassName: 'p-button-danger',
+                        accept: () => acceptQuestionDeletion(rowData.id),
+                    });
+                }}
             />
         </div>
     );
@@ -334,6 +389,7 @@ function ExamQuestions() {
             >
                 <Image src={imagePopup} alt="Image" width="100%"/>
             </Dialog>
+            <ConfirmDialog/>
         </div>
     );
 }
