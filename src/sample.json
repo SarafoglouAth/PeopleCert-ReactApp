@@ -4,7 +4,7 @@
     "questions": [
         {
             "id": 1,
-            "questionText": "Question 1?",
+            "questionText": "Browser security prevents a web page from making requests to a different domain than the one that served the web page.",
             "HasPicture": null,
             "Answers": [
                 { "id": 1, "text": "Option1", "isCorrect": false },
@@ -16,7 +16,7 @@
         ]},
         {
             "id": 2,
-            "questionText": "Question 2?",
+            "questionText": "This restriction is called the same-origin policy. The same-origin policy prevents a malicious site from reading sensitive data from another site. Sometimes, you might want to allow other sites to make cross-origin requests to your app. ?",
             "HasPicture": "https://i.ibb.co/cwKLjCq/React-Function-Question.png",
             "Answers": [
                 { "id": 1, "text": "Option1", "isCorrect": false },
