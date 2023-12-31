@@ -4,8 +4,7 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 
-import {ConfirmDialog} from 'primereact/confirmdialog';
-import {confirmDialog} from 'primereact/confirmdialog';
+import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
 
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
@@ -26,15 +25,13 @@ function ExamQuestions() {
     const [loading, setLoading] = useState(true);
     const [exam, setExam] = useState(null);
 
-    const url = "https://api.mocki.io/v2/1e376031/AdminCRUDExams";
+    const url = "https://webhook.site/544c124d-fab7-4767-bbdc-0e3a5cfa63c6";
 
     const [expandedRows, setExpandedRows] = useState(null);
 
     const [imagePopup, setImagePopup] = useState('');
     const [visibleImagePopup, setVisibleImagePopup] = useState(false);
 
-    // const [questionEditorVisible, setQuestionEditorVisible] = useState(false);
-    // const [questionEditorHeader, setQuestionEditorHeader] = useState("");
     const [questionEditor, setQuestionEditor] = useState({
         visible: false,
         header: '',
@@ -95,7 +92,7 @@ function ExamQuestions() {
     const rowExpansionTemplate = (question) => { //μου δίνει το row
         return (
             <div className="p-1">
-                <AnswersTable answers={question.Answers} admin={admin}/>
+                <AnswersTable answers={question.Answers} admin={admin} questionId={question.id}/>
             </div>
         );
     };

@@ -3,56 +3,105 @@ import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 
+import {confirmDialog} from 'primereact/confirmdialog';
+
 import {DataTable} from "primereact/datatable";
+import {Tag} from "primereact/tag";
+import {Checkbox} from 'primereact/checkbox';
 import {Column} from "primereact/column";
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import {InputTextarea} from "primereact/inputtextarea";
+import axios from "axios";
 
 
-function AnswersTable(props){
-    const [dialogVisible, setDialogVisible] = useState(false);
-    const [value, setValue] = useState("");
+function AnswersTable(props) {
+    const [answerEditor, setAnswerEditor] = useState({
+        visible: false,
+        isAdd: false,
+        header: '',
+        value: '',
+        isCorrect: false,
+        allowMarkCorrect: false,
+        answerId: null
+    });
 
-    const AdminUiAnswerDeleteUpdateButtons = (
-        <Column
-            className="p-1 "
-            body={
-                <div className="flex justify-content-center align-items-center gap-2">
-                    <Button
-                        tooltip="Update an Answer"
-                        tooltipOptions={{ position: "left" }}
-                        icon="pi pi pi-pencil"
-                        size="small"
-                        severity="secondary"
-                        style={{ width: "35px" }}
-                        onClick={() => {
-                            setDialogVisible(true);
+    const [answers, setAnswers] = useState(props.answers);
+    const admin = props.admin;
+    const questionId = props.questionId;
 
-                            // setValue("To be implemented");
-                        }}
-                    ></Button>
-                    <Button
-                        tooltip="Delete an Answer"
-                        tooltipOptions={{ position: "left" }}
-                        icon="pi pi-trash"
-                        size="small"
-                        severity="danger"
-                        style={{ width: "35px" }}
-                    ></Button>
-                </div>
-            }
-        ></Column>
-    );
-    function AdminUiAnswerDeleteUpdateButtonsToggle() {
+    function acceptAnswerDeletion(answerId) {
+        axios.delete(`https://webhook.site/e4681f83-c717-42b9-9d2e-8462156203ac/${answerId}`)
+            .then(successResponse => {
+                setAnswers(successResponse.data);
+            }).catch(errorResponse => console.error(errorResponse));
+    }
+
+    function answerButtonsColumnTemplate() {
         if (admin) {
-            return AdminUiAnswerDeleteUpdateButtons;
+            return (<Column
+                className="p-1 "
+                body={(rowData) =>
+                    <div className="flex justify-content-center align-items-center gap-2">
+                        <Button
+                            tooltip="Update an Answer"
+                            tooltipOptions={{position: "left"}}
+                            icon="pi pi pi-pencil"
+                            size="small"
+                            severity="secondary"
+                            style={{width: "35px"}}
+                            onClick={() => {
+                                showAnswerEditor(false, rowData.text, rowData.isCorrect, rowData.id)
+                            }}
+                        ></Button>
+                        <Button
+                            tooltip="Delete an Answer"
+                            tooltipOptions={{position: "left"}}
+                            icon="pi pi-trash"
+                            size="small"
+                            severity="danger"
+                            style={{width: "35px"}}
+                            onClick={() => {
+                                confirmDialog({
+                                    message: 'Do you want to delete this Answer?',
+                                    header: 'Delete Confirmation',
+                                    icon: 'pi pi-info-circle',
+                                    acceptClassName: 'p-button-danger',
+                                    accept: () => acceptAnswerDeletion(rowData.id),
+
+                                });
+                            }}
+                        ></Button>
+                    </div>
+                }
+            ></Column>);
         }
     }
 
 
-    const header = () => {
+    function showAnswerEditor(isAdd, value, isCorrect, answerId) {
+        setAnswerEditor({
+            ...answerEditor,
+            visible: true,
+            isAdd: isAdd,
+            header: isAdd ? 'Add an Answer' : 'Update Answer',
+            value: value ?? '',
+            isCorrect: isCorrect,
+            allowMarkCorrect: (isAdd && answers.length > 0) || !isCorrect,
+            answerId: answerId
+        })
+    }
 
+    function hideAnswerEditor() {
+        setAnswerEditor({
+            ...answerEditor,
+            visible: false,
+            value: '',
+            answerId: null
+        })
+    }
+
+    const header = () => {
         return (
             <div className="flex align-items-center gap-2 ">
         <span>
@@ -63,38 +112,62 @@ function AnswersTable(props){
                         {" "}
                         <Button
                             label="Add"
-                            tooltip="Add a Answer"
+                            tooltip="Add an Answer"
                             icon="pi pi-plus"
                             size="small"
                             severity="success"
-                            style={{ width: "90px", height: "30px" }}
-                            // onClick={(e) => addRow()}
-                            onClick={() => {
-                                setDialogVisible(true);
-                                                            }}
+                            style={{width: "90px", height: "30px"}}
+                            onClick={() => showAnswerEditor(true, '', answers.length === 0, null)}
                         />
                         <Dialog
-                            header="Add new Answer"
-                            visible={dialogVisible}
-                            style={{ width: "75vw" }}
-                            contentStyle={{ height: "305px" }}
-                            onHide={() => setDialogVisible(false)}
+                            header={answerEditor.header}
+                            visible={answerEditor.visible}
+                            style={{width: "75vw"}}
+                            contentStyle={{height: "305px"}}
+                            onHide={() => hideAnswerEditor()}
                             footer={
-                                <Button
-                                    label="Save"
-                                    tooltip="Save the Answer"
-                                    size="small"
-                                    severity="success"
-                                    style={{ width: "90px", height: "30px" }}
-                                    // onClick={(e) => addRow()}
-                                />
+                                <div className="flex align-items-center justify-content-between">
+                                    <div className="flex align-items-center gap-2">
+                                        <label htmlFor="isCorrect" className="me-2">Is Correct</label>
+                                        <Checkbox inputId="isCorrect"
+                                                  disabled={!answerEditor.allowMarkCorrect}
+                                                  checked={answerEditor.isCorrect}
+                                                  onClick={() => {
+                                                      setAnswerEditor({
+                                                          ...answerEditor,
+                                                          isCorrect: !answerEditor.isCorrect
+                                                      });
+                                                  }}
+                                        />
+                                        {
+                                            answerEditor.allowMarkCorrect && answerEditor.isCorrect ?
+                                                <Tag icon="pi pi-exclamation-triangle" severity="warning"
+                                                     value="Currently correct answer will be replaced"></Tag>
+                                                :
+                                                ''
+                                        }
+                                    </div>
+                                    <Button
+                                        label="Save"
+                                        tooltip="Save the Answer"
+                                        size="small"
+                                        severity="success"
+                                        style={{width: "90px", height: "30px"}}
+                                        onClick={(e) => upsertAnswer()}
+                                    />
+                                </div>
                             }
                         >
                             <InputTextarea
-                                value={value}
-                                onChange={(e) => setValue(e.target.value)}
+                                value={answerEditor.value}
+                                onChange={(e) => {
+                                    setAnswerEditor({
+                                        ...answerEditor,
+                                        value: e.target.value
+                                    });
+                                }}
                                 autoResize
-                                style={{ minWidth: "100%" }}
+                                style={{minWidth: "100%"}}
                                 rows={12}
                             />
                         </Dialog>{" "}
@@ -105,12 +178,38 @@ function AnswersTable(props){
     };
 
 
+    function upsertAnswer() {
+        let request;
+        if (answerEditor.isAdd) {
+            request = axios.post('https://webhook.site/e4681f83-c717-42b9-9d2e-8462156203ac', {
+                questionId: questionId,
+                isCorrect: answerEditor.isCorrect,
+                text: answerEditor.value
+            });
 
-    const answers  = props.answers
-    const admin = props.admin
+        } else {
+            request = axios.put('https://webhook.site/e4681f83-c717-42b9-9d2e-8462156203ac', {
+                answerId: answerEditor.answerId,
+                isCorrect: answerEditor.isCorrect,
+                text: answerEditor.value
+            });
+        }
 
-    return(
-<DataTable
+        request.then(successResponse => {
+            setAnswers(successResponse.data);
+            hideAnswerEditor();
+        }).catch(errorResponse => console.error(errorResponse));
+    }
+
+    const correctColumnTemplate = (rowData) => {
+        return (
+            <div className={'flex justify-content-center'}>
+                <Checkbox readOnly={true} checked={rowData.isCorrect}></Checkbox>
+            </div>
+        )
+    };
+    return (
+        <DataTable
             value={answers}            //του λέω που είναι η λίστα που θέλω να μου φτιάξει με βάση το row
             dataKey="id"
             tableStyle={{minWidth: "5rem"}}
@@ -124,15 +223,11 @@ function AnswersTable(props){
             <Column
                 className="p-1 "
                 header="Correct"
-                body={
-                    <div className="flex flex-column justify-content-center align-items-center">
-                        <div className="card flex justify-content-center">
-                        </div>
-                    </div>
-                }
+                body={correctColumnTemplate}
             ></Column>
-    {AdminUiAnswerDeleteUpdateButtonsToggle()}
+            {answerButtonsColumnTemplate()}
         </DataTable>
-)
+    )
 }
+
 export default AnswersTable;
