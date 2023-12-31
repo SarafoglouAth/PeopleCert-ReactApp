@@ -35,6 +35,7 @@ function ExamQuestions() {
     const [questionEditor, setQuestionEditor] = useState({
         visible: false,
         header: '',
+        imageUrl: null,
         value: '',
         isAdd: false,
         questionId: null
@@ -97,7 +98,8 @@ function ExamQuestions() {
         );
     };
 
-    function showQuestionEditor(isAdd, value, questionId) {
+    function showQuestionEditor(isAdd, value, imageUrl, questionId) {
+        console.log(imageUrl);
         setQuestionEditor(
             {
                 ...questionEditor,
@@ -105,6 +107,7 @@ function ExamQuestions() {
                 isAdd: isAdd,
                 header: isAdd ? "Add new Question" : "Update Question",
                 value: value ?? '',
+                imageUrl: imageUrl,
                 questionId: questionId
             }
         );
@@ -113,20 +116,23 @@ function ExamQuestions() {
     const upsertQuestion = () => {
         //TODO: implement
         console.log(`Question Update not implemented yet, would update questionId: ${questionEditor}`, questionEditor);
+        let request;
         if (questionEditor.isAdd) {
-            axios.post('https://backend.yes/AddQuestion', {
+            request = axios.post('https://backend.yes/AddQuestion', {
                 examId: 'TODO: examId',
-                questionText: questionEditor.value
-            })
-                .then(successResponse => console.log(successResponse))
-                .catch(errorResponse => console.error(errorResponse));
+                questionText: questionEditor.value,
+                imageUrl: questionEditor.imageUrl
+            });
         } else {
-            axios.put(`https://backend.yes/UpdateQuestion/${questionEditor.questionId}`, {
-                questionText: questionEditor.value
+            request = axios.put(`https://backend.yes/UpdateQuestion`, {
+                questionId: questionEditor.questionId,
+                questionText: questionEditor.value,
+                imageUrl: questionEditor.imageUrl
             })
-                .then(successResponse => console.log(successResponse))
-                .catch(errorResponse => console.error(errorResponse));
         }
+        request
+            .then(successResponse => console.log(successResponse.data))
+            .catch(errorResponse => console.error(errorResponse));
     }
 
     const questionTextColumnHeader = () => {
@@ -145,36 +151,67 @@ function ExamQuestions() {
                             size="small"
                             severity="success"
                             style={{width: "90px", height: "30px"}}
-                            // onClick={(e) => addRow()}
-                            onClick={() => showQuestionEditor(true, undefined, null)}
+                            onClick={() => showQuestionEditor(true, undefined, null, null)}
                         />
                         <Dialog
                             header={<span> {questionEditor.header}</span>}
                             visible={questionEditor.visible}
                             style={{width: "75vw"}}
-                            contentStyle={{height: "305px"}}
+                            contentStyle={{height: "min-content"}}
                             onHide={() => setQuestionEditor({...questionEditor, visible: false})}
                             footer={
-                                <Button
-                                    label="Save"
-                                    tooltip="Save the Question"
-                                    size="small"
-                                    severity="success"
-                                    style={{width: "90px", height: "30px"}}
-                                    onClick={() => upsertQuestion()}
-                                />
+                                <div className="flex align-items-center justify-content-end">
+                                    <Button
+                                        label="Save"
+                                        tooltip="Save the Question"
+                                        size="small"
+                                        severity="success"
+                                        style={{width: "90px", height: "30px"}}
+                                        onClick={() => upsertQuestion()}
+                                    />
+
+                                </div>
                             }
                         >
-                            <InputTextarea
-                                value={questionEditor.value}
-                                onChange={(e) =>
-                                    setQuestionEditor({...questionEditor, value: e.target.value})
-                                }
-                                autoResize
-                                style={{minWidth: "100%"}}
-                                placeholder={'Type Question Text'}
-                                rows={12}
-                            />
+                            <div className={'flex flex-column gap-2 '}>
+                                <InputTextarea
+                                    value={questionEditor.value}
+                                    onChange={(e) =>
+                                        setQuestionEditor({...questionEditor, value: e.target.value})
+                                    }
+                                    autoResize
+                                    style={{minWidth: "100%"}}
+                                    placeholder={'Type Question Text'}
+                                    rows={12}
+                                />
+                                <div className="flex align-items-center gap-2 flex-1">
+                                    <label>Image:</label>
+                                    <InputTextarea
+                                        className={'flex flex-1'}
+                                        value={questionEditor.imageUrl}
+                                        onChange={(e) =>
+                                            setQuestionEditor({...questionEditor, imageUrl: e.target.value})
+                                        }
+                                        placeholder={'Image Url'}
+                                        rows={1}
+                                        autoResize={false}
+                                    />
+                                    {
+                                        !!questionEditor.imageUrl ? <Button
+                                            label="Delete"
+                                            tooltip="Delete Image"
+                                            tooltipOptions={{position: "top"}}
+                                            icon="pi pi-trash"
+                                            size="small"
+                                            severity="danger"
+                                            style={{width: "90px", height: "30px"}}
+                                            onClick={(e) => {
+                                                setQuestionEditor({...questionEditor, imageUrl: ''})
+                                            }}
+                                        /> : ''
+                                    }
+                                </div>
+                            </div>
                         </Dialog>{" "}
                     </>
                 )}
@@ -247,7 +284,7 @@ function ExamQuestions() {
                 size="small"
                 severity="secondary"
                 style={{width: "90px"}}
-                onClick={() => showQuestionEditor(false, rowData.questionText, rowData.id)}
+                onClick={() => showQuestionEditor(false, rowData.questionText, rowData.HasPicture, rowData.id)}
             />
             <Button
                 label="Delete"
@@ -292,38 +329,6 @@ function ExamQuestions() {
     }
 
     //  TODO: end of refactor into single method
-    const imagePopupHeader = () => {
-        return (
-            <div className="flex align-items-center gap-2">
-                <span>Image</span>
-                {admin && (
-                    <>
-                        {" "}
-                        <Button
-                            label="Delete"
-                            tooltip="Delete Image"
-                            tooltipOptions={{position: "top"}}
-                            icon="pi pi-trash"
-                            size="small"
-                            severity="danger"
-                            style={{width: "90px"}}
-                            onClick={(e) => alert(imagePopup)}
-                        />
-                        <Button
-                            label="Update"
-                            tooltip="Update Image"
-                            tooltipOptions={{position: "top"}}
-                            icon="pi pi-pencil"
-                            size="small"
-                            severity="secondary"
-                            style={{width: "90px"}}
-                            // onClick={(e) => deleteRow(rowData)}
-                        />{" "}
-                    </>
-                )}
-            </div>
-        );
-    };
 
     return (
         <div className="card">
@@ -374,11 +379,14 @@ function ExamQuestions() {
             }
             {/* POPUP Image element */}
             <Dialog
-                header={imagePopupHeader}
+                header={<div className="flex align-items-center gap-2">
+                    <span>Image</span>
+                </div>}
                 visible={visibleImagePopup}
                 dismissableMask={true}
                 maximizable
                 style={{width: "50vw"}}
+                draggable={false}
                 onHide={() => {
                     setImagePopup('');
                     setVisibleImagePopup(false)
