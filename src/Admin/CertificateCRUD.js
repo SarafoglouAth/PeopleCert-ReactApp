@@ -6,14 +6,13 @@ import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
-import { RadioButton } from 'primereact/radiobutton';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import axios from "axios";
 import Tester from "./Tester";
 
 // Component for CRUD operations on certificates
-export default function CertificateCRUD() {
+export default function CertificateCRUD({Role}) {
     // Define initial state and references
     let emptyCertificate = {
         ID: null,
@@ -136,12 +135,7 @@ export default function CertificateCRUD() {
         dt.current.exportCSV();
     };
 
-    const onCategoryChange = (e) => {
-        let _Certificate = { ...Certificate };
 
-        _Certificate['AssesmentResultLabel'] = e.value;
-        setCertificate(_Certificate);
-    };
 
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
@@ -154,13 +148,13 @@ export default function CertificateCRUD() {
 
 
 
-    const leftToolbarTemplate = () => {
-        return (
-            <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
-            </div>
-        );
-    };
+    const leftToolbarTemplate =(<>
+      {Role ==="Admin" &&
+        <div className="flex flex-wrap gap-2">
+            <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew}/>
+        </div>
+    }</>)   ;
+
 
     const rightToolbarTemplate = () => {
         return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
@@ -169,7 +163,7 @@ export default function CertificateCRUD() {
 
     // Function to preview and download a certificate
     function DownloadCertificate(rowData) {
-        let Name=rowData.FirstName+" "+rowData.MiddleName+" "+rowData.LastName;
+        let Name=rowData.FirstName+" "+rowData.MiddleName[0]+".  "+rowData.LastName;
         let Date=rowData.CertificationDate;
         let Course=rowData.Title;
         let id=rowData.ID;
@@ -180,8 +174,10 @@ export default function CertificateCRUD() {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editCertificate(rowData)} />
-                <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteCertificate(rowData)} />
+                {Role==="Admin" &&  (<><Button icon="pi pi-pencil" rounded outlined className="mr-2"
+                         onClick={() => editCertificate(rowData)}/>
+                    <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteCertificate(rowData)} /></>)
+    }
                 <Button icon="pi-download" rounded outlined severity="mr-2" onClick={() => DownloadCertificate(rowData)} />
             </React.Fragment>
         );
@@ -270,19 +266,7 @@ export default function CertificateCRUD() {
                     <InputText id="AssessmentTestCode" value={Certificate.AssessmentTestCode} onChange={(e) => onInputChange(e, 'AssessmentTestCode')} required rows={3} cols={20} />
                 </div>
 
-                <div className="field">
-                    <label className="mb-3 font-bold">Assessment Result</label>
-                    <div className="formgrid grid">
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="Pass" name="AssesmentResultLabel" value="Pass" onChange={onCategoryChange} checked={Certificate.AssesmentResultLabel === "Pass"} />
-                            <label htmlFor="Pass">Pass</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="Fail" name="AssesmentResultLabel" value="Fail" onChange={onCategoryChange} checked={Certificate.AssesmentResultLabel ==="Fail"} />
-                            <label htmlFor="Fail">Fail</label>
-                        </div>
-                    </div>
-                </div>
+
 
 
             </Dialog>

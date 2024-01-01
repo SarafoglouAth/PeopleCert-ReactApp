@@ -13,7 +13,7 @@ import {Calendar} from "primereact/calendar";
 import {Password} from "primereact/password";
 
 
-export default function CandidatesDemo() {
+export default function CandidatesDemo({Role}) {
     const today = new Date();
     const currentYear = today.getFullYear();
 
@@ -173,11 +173,13 @@ export default function CandidatesDemo() {
 
 
     const leftToolbarTemplate = () => {
-        return (
+        return ( <>{Role==="Admin" &&
+
             <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew}/>
             </div>
-        );
+
+    }</>);
     };
     const rightToolbarTemplate = () => {
         return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
@@ -198,12 +200,12 @@ export default function CandidatesDemo() {
     );
 
     const actionBodyTemplate = (rowData) => {
-        return (
+        return (<>{Role==="Admin" &&
             <React.Fragment>
                 <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editCandidate(rowData)} />
                 <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteCandidate(rowData)} />
             </React.Fragment>
-        );
+        }</>)
     };
     const editCandidate = (Candidate) => {
         setShowPass(false);

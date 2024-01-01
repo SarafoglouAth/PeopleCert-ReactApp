@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75vh; /* This will make sure your page takes full viewport height */
-
+    height: auto; /* This will make sure your page takes full viewport height */
+    width: 110%;
     background: #fff;
     font-family: 'Arvo', serif;
 }
@@ -33,3 +33,4 @@
     margin: 20px 0;
     display: inline-block;}
 .contant_box_404{ margin-top:-50px;}
+

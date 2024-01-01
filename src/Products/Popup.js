@@ -73,7 +73,7 @@ function Popup({TheProduct,handlePurchaseSubmit}) {
                                 <div className="col-lg-6">
                                        <div className="product Mrg-50">
                                             <h3>{TheProduct.Title}</h3>
-                                            <img src={selectedImage} alt={TheProduct.Title}/>
+                                            <img src={TheProduct.Image} alt={TheProduct.Title}/>
                                             <p>Price: {TheProduct.Price} €</p>
                                         </div>
                                 </div>
@@ -166,7 +166,7 @@ function Popup({TheProduct,handlePurchaseSubmit}) {
                                                         <div className="invalid-feedback">{errors.cvc}</div>
                                                     )}
                                                      </div>
-                                                <div className="form-group col-sm-12">
+                                                <div className="form-group col-sm-12 ">
                                                     <button onClick={handleSubmit} type="button" className="btn btn-primary btn-block">Proceed</button>
                                                 </div>
                                             </div>

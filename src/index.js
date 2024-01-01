@@ -6,11 +6,12 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.css";                  //core css
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <PrimeReactProvider>
-    <Nav />
+    <App />
 </PrimeReactProvider>
 );
 

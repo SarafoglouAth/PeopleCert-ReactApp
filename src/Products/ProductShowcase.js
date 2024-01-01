@@ -9,18 +9,6 @@ import "primeicons/primeicons.css";
 import { Card } from "primereact/card";
 import { Toast } from "primereact/toast";
 
-// URLs for product images
-const ReactPic = "https://i.ibb.co/w6jL8Bp/ReactPic.webp";
-const NodeJSPic = "https://i.ibb.co/FY4LXg4/Node-JSPic.webp";
-const AngularPic = "https://i.ibb.co/9cvQ5YX/Angular-Pic.webp";
-
-// Object containing image URLs
-const images = {
-    NodeJSPic,
-    AngularPic,
-    ReactPic,
-};
-
 // Component responsible for showcasing products
 const ProductShowcase = () => {
     // State variables
@@ -31,8 +19,7 @@ const ProductShowcase = () => {
 
     // Individual product component
     const Product = ({ title, image, description, price, Purchase, isPurchased }) => {
-        const selectedImage = images[image]; // Get the selected product's image URL
-        const header = (<img alt="Card" src={selectedImage} />); // Header for the product card
+        const header = (<img alt="Card" src={image} />); // Header for the product card
         const footer = (
             <>
                 {/* Conditional rendering of Purchase or Purchased button */}
@@ -83,6 +70,7 @@ const ProductShowcase = () => {
     // Render the product showcase
     return (
         <>
+
             <Toast ref={toast} /> {/* Toast component for displaying messages */}
 
             <div className="product-showcase BackgroundColor">
