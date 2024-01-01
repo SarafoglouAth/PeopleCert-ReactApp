@@ -296,6 +296,7 @@ export const LoginSignup = () => {
     <button onClick={prevStep}>Previous</button>
     <button onClick={nextStep}>Next</button>
     <br /><br />
+    <h1></h1>
     <button onClick={handleSubmit}>Submit</button>
   </>
 
@@ -303,7 +304,4 @@ export const LoginSignup = () => {
 
 export default LoginSignup;
 
-function hello(numberToreturn) {
-  return numberToreturn * 2
-}
-hello(120)
+
