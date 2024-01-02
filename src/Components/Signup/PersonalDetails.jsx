@@ -57,7 +57,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Sign Up</h2>
+      <h2 className="form-title">Step 1</h2>
       <h3 className="section-title">Personal Details</h3>
       <div>
         <InputText
@@ -92,7 +92,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
         />
       </div>
       <br />
-      <div id="native-language-dropdown-container">
+      <div>
         <Dropdown
           value={personalDetails.nativeLanguage}
           onChange={handleLanguageChange}
@@ -102,8 +102,8 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
           className="w-full md:w-14rem"
         />
       </div>
-      <div id="gender-dropdown-container">
-        <br />
+      <br />
+      <div>
         <Dropdown
           value={personalDetails.gender}
           onChange={handleGenderChange}

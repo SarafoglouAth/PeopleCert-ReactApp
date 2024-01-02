@@ -57,7 +57,7 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 3</h2>
+      <h2 className="form-title">Step 4</h2>
       <h3 className="section-title">Address</h3>
       <div>
         <InputText

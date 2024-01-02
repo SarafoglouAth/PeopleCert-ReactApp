@@ -49,7 +49,7 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 1</h2>
+      <h2 className="form-title">Step 2</h2>
       <h3 className="section-title">ID</h3>
       <div>
         <InputText

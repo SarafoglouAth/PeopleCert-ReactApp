@@ -45,7 +45,7 @@ const ContactInfo = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 2</h2>
+      <h2 className="form-title">Step 3</h2>
       <h3 className="section-title">Contact</h3>
       <br />
       <InputText
