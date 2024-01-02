@@ -16,7 +16,7 @@ const MyPurchases = ({ title, image,ExamDate,ScheduleTest,takeTheTest,isTestTake
             {isTestTaken ? <Button className="Rounded" disabled label="Waiting For results" severity="secondary"></Button> :
                 !ExamDate ? <Button className="Rounded" onClick={ScheduleTest} label="Schedule the test" severity="info"></Button> :
                     ExamDate===new Date().toLocaleDateString() ? <Button className="Rounded" onClick={takeTheTest} label="Take the test" severity="success"></Button> :
-                <Button className="Rounded" onClick={ScheduleTest}label="Reschedule" severity="help"></Button>}
+                <Button className="Rounded" onClick={ScheduleTest} label="Reschedule" severity="help"></Button>}
 
         </>
     );

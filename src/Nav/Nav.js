@@ -10,6 +10,7 @@ import "./Nav.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserGraduate} from "@fortawesome/free-solid-svg-icons";
 import Purchases from "../MyPurchases/Purchases";
+import MarkExams from "../Admin/MarkExams";
 export default function Nav() {
     const [Role, setRole] = useState("Admin");
     const [usernameLogged, setUsernameLogged] = useState("Admin");
@@ -23,6 +24,7 @@ export default function Nav() {
                         <Link  to="/CertificateCRUD" >CertificateCRUD    </Link>
                         <Link  to="/CertificatesShowcase">CertificatesShowcase   </Link>
                         <Link  to="/Purchases">Purchases   </Link>
+                        <Link  to="/MarkExams">MarkExams   </Link>
                 <div className="dropdown">
      <span className="icon">
          <p className="SignedAs"><FontAwesomeIcon icon={faUserGraduate}/> {usernameLogged}</p>
@@ -42,6 +44,7 @@ export default function Nav() {
                         <Route path="/CertificateCRUD"   element={<CertificateCRUD Role={Role}/>}/>
                         <Route path="/Purchases"  element={<Purchases/>}/>
                         <Route path="/CertificatesShowcase"  element={<CertificatesShowcase/>}/>
+                        <Route path="/MarkExams"  element={<MarkExams/>}/>
                 <Route path="*" element={<NotFoundPage />} />
 
             </Routes>

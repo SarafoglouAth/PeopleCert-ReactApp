@@ -1,0 +1,94 @@
+.marker-hub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.exam-item {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 20px;
+    width: 40%;
+}
+
+.exam-item h2 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+}
+
+.exam-item p {
+    margin: 0 0 10px;
+}
+
+.exam-item select, .exam-item button {
+    margin: 5px 0;
+}
+
+input[type=number] {
+    width: 10px;
+
+}
+
+.center-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-Marker-inner {
+    display: none; /* Hide the popup by default */
+    position: fixed; /* Position the popup in the center of the screen */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Add other styles as needed */
+}
+
+.popup-Marker-inner.show {
+    display: block; /* Show the popup when the .show class is added */
+}
+
+.onClose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 20%;
+}
+
+.popup-Marker-inner {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 80%; /* Adjust width as needed */
+
+}
+
+.popup-Marker-inner h1 {
+    margin-bottom: 20px;
+}
+
+.popup-Marker-inner button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.popup-Marker-inner button:hover {
+    background-color: #e0e0e0;
+}
+
+.many-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+}
