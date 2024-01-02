@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
@@ -9,17 +9,17 @@ import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import {Button} from "primereact/button";
-import {Toast} from "primereact/toast";
+
 import {Image} from "primereact/image";
 import {Dialog} from "primereact/dialog";
 import {InputTextarea} from "primereact/inputtextarea";
 
 import AnswersTable from "./AnswersTable";
 
-//make an obvious difference between question space and answer's
-
+//Αυτό το component αφορά ένα single exam, για να δουλέψει αυτό το componenet θα χρειαστεί από το rooting να πάρει το examID
+//Πρέπει να ενημερωθεί το post του new Question
 function ExamQuestions() {
-    const toast = useRef(null);
+
 
     //data
     const [loading, setLoading] = useState(true);
@@ -346,7 +346,7 @@ function ExamQuestions() {
                 severity="warning"
                 onClick={() => setAdminValue(true)}
             />
-            <Toast ref={toast}/>
+
             {exam === null ? "" :
 
 

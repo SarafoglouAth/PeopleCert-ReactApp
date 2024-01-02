@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
@@ -13,6 +13,9 @@ import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import {InputTextarea} from "primereact/inputtextarea";
 import axios from "axios";
+
+//Όταν γίνεται create, update, delete ένα answer το backend θα πρέπει να έχει στο responce όλα τα answer που αντιστοιχούν σε αυτο το question
+
 
 
 function AnswersTable(props) {
