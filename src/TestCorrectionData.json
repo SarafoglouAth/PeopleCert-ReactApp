@@ -1,10 +1,9 @@
-const TestCorrectionData = [
+[
     {
         "TestName": "React basic",
-        "ExamDate": "1/1/2024",
         "TestID": 124124,
+        "ExamDate": "1/1/2024",
         "Questions": [
-
             {
                 "id": 1,
                 "questionText": "Browser security prevents a web page from making requests to a different domain than the one that served the web page.",
@@ -13,27 +12,35 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+"isCorrect": false
+
+
                     },
                     {
                         "id": 4,
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
+                        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
@@ -45,27 +52,33 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
@@ -77,27 +90,33 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
@@ -109,59 +128,71 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
             {
                 "id": 5,
                 "questionText": "Question 5?",
-                "UserAnswer": 5,
+                "UserAnswer": 1,
                 "HasPicture": null,
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
@@ -173,27 +204,33 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
@@ -205,27 +242,33 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             },
@@ -237,32 +280,36 @@ const TestCorrectionData = [
                 "Answers": [
                     {
                         "id": 1,
-                        "text": "Option1"
+                        "text": "Option1",
+                        "isCorrect": true
                     },
                     {
                         "id": 2,
-                        "text": "Option2"
+                        "text": "Option2",
+                        "isCorrect": false
                     },
                     {
                         "id": 3,
-                        "text": "Option3"
+                        "text": "Option3",
+                        "isCorrect": false
                     },
                     {
                         "id": 4,
-                        "text": "Option4"
+                        "text": "Option4",
+                        "isCorrect": false
                     },
                     {
                         "id": 5,
-                        "text": "Option5"
+                        "text": "Option5",
+                        "isCorrect": false
                     },
                     {
                         "id": 6,
-                        "text": "Option6"
+                        "text": "Option6",
+                        "isCorrect": false
                     }
                 ]
             }
         ]
     }
 ]
-
-export default TestCorrectionData;

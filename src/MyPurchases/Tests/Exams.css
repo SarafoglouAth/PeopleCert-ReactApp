@@ -44,3 +44,11 @@
     top: 5%;
     right: 5%;
 }
+.correct {
+    color: #3ea93e;
+    font-size:30px;
+}
+.wrong {
+    color: #ff0000;
+    font-size:30px;
+}
