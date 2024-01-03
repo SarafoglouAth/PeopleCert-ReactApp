@@ -72,14 +72,15 @@ export default function Nav() {
             </nav>
 
             <Routes>
-                        <Route path="/"  element = {Role ==="Candidate"? <ProductShowcase/>: (Role==="QA"|| Role ==="Admin" )? <Products  Role={Role}/>: <Purchases Role={Role} /> }/>
+                <Route path="/"  element = {Role ==="Candidate"? <ProductShowcase/>: (Role==="QA"|| Role ==="Admin" )? <Products  Role={Role}/>: <Purchases Role={Role} /> }/>
+                <Route path="/Purchases"  element={<Purchases Role={Role} />}  />
+                <Route path="/CertificatesShowcase"  element={<CertificatesShowcase/>} />
                 {(Role==="Admin"|| Role==="QA") && <>
                 <Route path="/Candidates"  element={<CandidatesCRUD Role={Role}/>} />
                 <Route path="/Users" element={<UsersCRUD Role={Role}/>} />
                 <Route path="/Certificates" element={<CertificateCRUD Role={Role}/>} /> </>}
-                        <Route path="/Purchases"  element={<Purchases Role={Role} />}  />
-                        <Route path="/CertificatesShowcase"  element={<CertificatesShowcase/>} />
-                        <Route path="/MarkExams"  element={<MarkExams Role={Role} />} />
+                {(Role !== "Candidate") && <>
+                        <Route path="/MarkExams"  element={<MarkExams Role={Role} />} /> </>}
 
 
 
