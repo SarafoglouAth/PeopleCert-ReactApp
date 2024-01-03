@@ -10,7 +10,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import './style.css';
+
 
 export const LoginSignup = () => {
   const [step, setStep] = useState(0);
@@ -38,19 +38,23 @@ export const LoginSignup = () => {
   };
 
   return (
-    <div className="p-d-flex p-jc-center p-ai-center">
-      <Card className="p-shadow-3 p-text-center p-p-3 p-border-radius-sm p-font-semibold">
-        {step === 0 && <UsernamePassword personalDetails={formData} onInputChange={onInputChange} />}
-        {step === 1 && <PersonalDetails personalDetails={formData} onInputChange={onInputChange} />}
-        {step === 2 && <IdInfo personalDetails={formData} onInputChange={onInputChange} />}
-        {step === 3 && <ContactInfo personalDetails={formData} onInputChange={onInputChange} />}
-        {step === 4 && <AddressInfo personalDetails={formData} onInputChange={onInputChange}/>}
-        <br />
-        <Button label="Prev" className="p-mr-2 p-rounded" onClick={prevStep} />
-        <Button label="Next" className="p-mr-2 p-rounded" onClick={nextStep} />
-        <Button label="Submit" className="p-rounded" onClick={handleSubmit} />
-      </Card>
+    <div class="h-screen flex justify-content-center align-content-center flex-wrap">
+      <div class="grid w-full center">
+        <div class="col-2 col-offset-5">
+          <Card className="w-full">
+            {step === 0 && <UsernamePassword personalDetails={formData} onInputChange={onInputChange} />}
+            {step === 1 && <PersonalDetails personalDetails={formData} onInputChange={onInputChange} />}
+            {step === 2 && <IdInfo personalDetails={formData} onInputChange={onInputChange} />}
+            {step === 3 && <ContactInfo personalDetails={formData} onInputChange={onInputChange} />}
+            {step === 4 && <AddressInfo personalDetails={formData} onInputChange={onInputChange} />}
+            <br />
+            <Button label="Prev" className="mr-2" onClick={prevStep} />
+            {step <= 3 && <Button label="Next" className="mr-2 " onClick={nextStep} />}
+            {step === 4 && < Button label="Submit" onClick={handleSubmit} />}
+          </Card>
+        </div></div>
     </div>
+
   );
 };
 

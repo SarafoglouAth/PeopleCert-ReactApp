@@ -68,7 +68,7 @@ const UsernamePassword = ({ personalDetails, onInputChange }) => {
       </ul>
     </small>
   );
-  
+
 
   return (
     <>
@@ -80,10 +80,10 @@ const UsernamePassword = ({ personalDetails, onInputChange }) => {
           value={personalDetails.username}
           onChange={handleInputChange}
           name="username"
-          className={!usernameValid ? "p-invalid" : ""}
+          className={!usernameValid ? "p-invalid w-full" : "w-full"}
         />
-        <br/>
-        <br/>
+        <br />
+        <br />
         <Password
           placeholder="Password"
           value={personalDetails.password}
@@ -91,7 +91,7 @@ const UsernamePassword = ({ personalDetails, onInputChange }) => {
           header={header}
           footer={footer}
           name="password"
-          className={!passwordValid.lowercase || !passwordValid.uppercase || !passwordValid.numeric || !passwordValid.length ? "p-invalid" : ""}
+          className={!passwordValid.lowercase || !passwordValid.uppercase || !passwordValid.numeric || !passwordValid.length ? "p-invalid w-full" : "w-full"}
           toggleMask
         />
       </div>

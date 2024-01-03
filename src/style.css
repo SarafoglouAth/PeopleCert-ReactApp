@@ -1,0 +1,11 @@
+@import "~primeflex/primeflex.css";
+body {
+  margin: 0;
+  height: 100vh;
+}
+.p-password {
+  width: inherit;
+}
+.p-password-input {
+  width: inherit;
+}
