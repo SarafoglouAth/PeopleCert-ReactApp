@@ -1,27 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import Nav from "../src/Nav/Nav"
+import "primereact/resources/primereact.css";                  //core css
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-                  Edit <code>src/App.js</code> and save to reload.
-                  testing code upload
-          this is my brunch now
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+function  App() {
+    return (
+        <div>
+            <Nav/>
+        </div>
+    )
 }
-
 export default App;
+
