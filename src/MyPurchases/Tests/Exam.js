@@ -137,7 +137,7 @@ const Exam = ({exams ,onExamSubmit ,Role }) => {
         <Toast ref={toast} />
        <>
                 <div className="container">
-                    {Showtime({ timer })}
+                    {Role==="Candidate"&&Showtime({timer})}
                     <form onSubmit={handleSubmit}>
                         {exams.map((test, index) => (
                             <div className="quizLayer" key={index}>

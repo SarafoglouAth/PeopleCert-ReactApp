@@ -16,7 +16,7 @@ import { Tag } from 'primereact/tag';
 import axios from "axios";
 import { Image } from 'primereact/image';
 
-export default function ProductsCRUD() {
+export default function ProductsCRUD({Role,setTargetedProduct,handleQuestionVisibility}) {
     let emptyProduct = {
         ExamID: null,
         Title: '',
@@ -122,7 +122,7 @@ export default function ProductsCRUD() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+                {Role ==="Admin"&& <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew}/>}
             </div>
         );
     };
@@ -135,7 +135,12 @@ export default function ProductsCRUD() {
         return <Image src={rowData.Image} alt="Image" width="250" preview />;
     };
 
+    const showQuestionsAnswers = (rowData) => {
+        let _product = rowData;
+        handleQuestionVisibility();
+        setTargetedProduct(_product);
 
+    };
 
 
 
@@ -144,8 +149,12 @@ export default function ProductsCRUD() {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
-                <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteProduct(rowData)} />
+
+                {Role ==="Admin"? <> <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
+                    <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteProduct(rowData)} />
+                    <Button icon="pi pi-question-circle" rounded outlined  onClick={() => showQuestionsAnswers(rowData)} /> </> :
+                     <Button icon="pi pi-question-circle" rounded outlined className="mr-2" onClick={() => showQuestionsAnswers(rowData)} />}
+
             </React.Fragment>
         );
     };
@@ -182,7 +191,7 @@ export default function ProductsCRUD() {
                     <Column field="Image" header="Image" preview  body={ImageBodyTemplate}></Column>
                     <Column field="Description" header="Description" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column field="Price" header="Price $"  sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                    <Column body={actionBodyTemplate} exportable={false} style={{minWidth: '12rem'}}></Column>
                 </DataTable>
             </div>
 

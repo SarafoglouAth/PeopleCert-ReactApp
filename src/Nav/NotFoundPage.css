@@ -1,13 +1,23 @@
 .page_404 {
+    padding-top: 50px;
+    padding-right: 5%; /* Adjust as needed */
+    padding-left: 5%; /* Adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: auto; /* This will make sure your page takes full viewport height */
-    width: 110%;
+
+    width: 100%; /* Take full width of the container */
     background: #fff;
     font-family: 'Arvo', serif;
 }
 
+/* Media query for larger screens */
+@media screen and (min-width: 768px) {
+    .page_404 {
+        max-width: 1200px; /* Set a maximum width for larger screens */
+        margin: 0 auto; /* Center the content horizontally */
+    }
+}
 .page_404  img{ width:100%;}
 
 .four_zero_four_bg{

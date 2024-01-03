@@ -11,7 +11,7 @@ import axios from "axios";
 import {Calendar} from "primereact/calendar";
 import { Dropdown } from 'primereact/dropdown';
 
-export default function MarkExams() {
+export default function MarkExams({Role}) {
     const today = new Date();
     const oneMonthLater = new Date(today);
     oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
@@ -191,7 +191,7 @@ export default function MarkExams() {
                     <Column field="ExamDate" header="ExamDate" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column field="MarkDate" header="Mark Date Due" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column field="MarkerAssigned" header="Marker Assigned" sortable style={{ minWidth: '10rem' }}></Column>
-                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                    {Role==="Admin" && <Column body={actionBodyTemplate} exportable={false} style={{minWidth: '12rem'}}></Column>}
                 </DataTable>
             </div>
 

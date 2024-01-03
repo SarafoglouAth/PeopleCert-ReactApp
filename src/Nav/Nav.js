@@ -11,11 +11,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserGraduate} from "@fortawesome/free-solid-svg-icons";
 import Purchases from "../MyPurchases/Purchases";
 import MarkExams from "../Admin/MarkExams";
-import ProductsCRUD from "../Admin/ProductsCRUD";
-import AdminHome from "../Admin/AdminHome";
-import ExamQuestions from "../Questions/ExamQuestions";
+import Products from "../Admin/Products";
+
 export default function Nav() {
-    const [Role, setRole] = useState("Candidate");
+    const [Role, setRole] = useState("Admin");
     const [usernameLogged, setUsernameLogged] = useState("Admin");
 
     function BeCandidade() {
@@ -34,16 +33,25 @@ export default function Nav() {
     return (<div className="Application">
         <BrowserRouter>
             <nav >
-                        <Link  to="/">ProductShowcase    </Link>
-                        <Link  to="/CandidatesCRUD" >My CandidatesCRUD   </Link>
-                        <Link  to="/UsersCRUD">UsersCRUD     </Link>
-                        <Link  to="/ProductsCRUD">ProductsCRUD     </Link>
-                        <Link  to="/CertificateCRUD" >CertificateCRUD    </Link>
-                        <Link  to="/CertificatesShowcase">CertificatesShowcase   </Link>
-                        <Link  to="/Purchases">{Role==="Candidate"?  "Purchases": "Marking"}   </Link>
+                        <Link  to="/">{Role==="Marker"?"Exams to Mark" : "Products"}    </Link>
+                {(Role==="Admin"|| Role==="QA") && <>
+                        <Link  to="/Candidates" >Candidates   </Link>
+                        <Link  to="/Users">Users     </Link>
+                        <Link  to="/Certificates" >Certificates    </Link>
                         <Link  to="/MarkExams">Exam Delegation   </Link>
-                        <Link  to="/AdminHome">Admin Home   </Link>
-                        <Link  to="/ExamQuestions">Exam Questions   </Link>
+                        <Link  to="/Purchases">Mark Exams </Link>
+                    </>
+                }
+                {
+                    Role==="Candidate"&& <>
+                        <Link  to="/Purchases">Purchases </Link>
+                        <Link  to="/CertificatesShowcase">CertificatesShowcase   </Link>
+
+                    </>
+                }
+
+
+
 
                 <div className="dropdown">
                     <button onClick={BeCandidade}>Be Candidate</button>
@@ -64,18 +72,20 @@ export default function Nav() {
             </nav>
 
             <Routes>
-                        <Route path="/" element={<ProductShowcase Role={Role}/>}/>
-                        <Route path="/CandidatesCRUD"  element={<CandidatesCRUD Role={Role}/>}/>
-                        <Route path="/UsersCRUD" element={<UsersCRUD/>}/>
-                        <Route path="/CertificateCRUD"   element={<CertificateCRUD Role={Role}/>}/>
+                        <Route path="/"  element = {Role ==="Candidate"? <ProductShowcase/>: (Role==="QA"|| Role ==="Admin" )? <Products  Role={Role}/>: <Purchases Role={Role} /> }/>
+                {(Role==="Admin"|| Role==="QA") && <>
+                <Route path="/Candidates"  element={<CandidatesCRUD Role={Role}/>} />
+                <Route path="/Users" element={<UsersCRUD Role={Role}/>} />
+                <Route path="/Certificates" element={<CertificateCRUD Role={Role}/>} /> </>}
                         <Route path="/Purchases"  element={<Purchases Role={Role} />}  />
-                        <Route path="/CertificatesShowcase"  element={<CertificatesShowcase/>}/>
-                        <Route path="/MarkExams"  element={<MarkExams/>}/>
-                        <Route path="/ProductsCRUD"  element={<ProductsCRUD/>}/>
-                        <Route path="/AdminHome"  element={<AdminHome/>}/>
-                        <Route path="/ExamQuestions"  element={<ExamQuestions Role={Role}/>}/>
+                        <Route path="/CertificatesShowcase"  element={<CertificatesShowcase/>} />
+                        <Route path="/MarkExams"  element={<MarkExams Role={Role} />} />
 
-                <Route path="*" element={<NotFoundPage />} />
+
+
+
+
+                        <Route path="*" element={<NotFoundPage />} />
 
             </Routes>
         </BrowserRouter>

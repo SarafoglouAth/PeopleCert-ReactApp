@@ -55,11 +55,7 @@ export default function CertificateCRUD({Role}) {
         fetchUserData();
     }, []);
 // Functions for handling dialogs, saving, editing, and deleting certificates
-    const openNew = () => {
-        setCertificate(emptyCertificate);
-        setSubmitted(false);
-        setCertificateDialog(true);
-    };
+
 
     const hideDialog = () => {
         setSubmitted(false);
@@ -148,12 +144,6 @@ export default function CertificateCRUD({Role}) {
 
 
 
-    const leftToolbarTemplate =(<>
-      {Role ==="Admin" &&
-        <div className="flex flex-wrap gap-2">
-            <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew}/>
-        </div>
-    }</>)   ;
 
 
     const rightToolbarTemplate = () => {
@@ -178,7 +168,7 @@ export default function CertificateCRUD({Role}) {
                          onClick={() => editCertificate(rowData)}/>
                     <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteCertificate(rowData)} /></>)
     }
-                <Button icon="pi-download" rounded outlined severity="mr-2" onClick={() => DownloadCertificate(rowData)} />
+                <Button icon="pi pi-download" rounded outlined severity="mr-2" onClick={() => DownloadCertificate(rowData)} />
             </React.Fragment>
         );
     };
@@ -205,7 +195,7 @@ export default function CertificateCRUD({Role}) {
         <div>
             <Toast ref={toast} />
             <div className="card">
-                <Toolbar className="mb-4" start={leftToolbarTemplate} end={rightToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4"  end={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={Certificates}
                            loading={loading}

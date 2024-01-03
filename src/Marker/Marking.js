@@ -12,7 +12,7 @@ import axios from "axios";
 import {Calendar} from "primereact/calendar";
 import { Dropdown } from 'primereact/dropdown';
 
-export default function Marking({setTargetedExam}) {
+export default function Marking({setTargetedExam,Role}) {
 
     let emptyMarking = {
         id: null,
@@ -62,7 +62,7 @@ export default function Marking({setTargetedExam}) {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editMarking(rowData)} />
+                {Role==="Admin"?<Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editMarking(rowData)}/>:<Button icon="pi pi-eye" rounded outlined className="mr-2" onClick={() => editMarking(rowData)}/>}
             </React.Fragment>
         );
     };

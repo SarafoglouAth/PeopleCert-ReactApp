@@ -38,7 +38,7 @@ const Purchases = ({Role}) => {
 
     return (
         <>
-            {!showExam ? ( Role ==="Candidate" ? <PurchasesShowcaseS setTargetedExam={setTargetedExam}/> : <Marking setTargetedExam={setTargetedExam} /> )
+            {!showExam ? ( Role ==="Candidate" ? <PurchasesShowcaseS setTargetedExam={setTargetedExam}/> : <Marking setTargetedExam={setTargetedExam} Role={Role} /> )
                 : ( loading ? (
                     <div className="card flex justify-content-center">
                         <ProgressSpinner/>

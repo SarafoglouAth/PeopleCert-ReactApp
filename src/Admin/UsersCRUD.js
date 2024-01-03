@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -14,10 +13,10 @@ import axios from "axios";
 
 export default function UsersDemo() {
     let emptyUser = {
-        ID: null,
-        UserName: '',
-        PassWord: '',
-        Role_ID: 4,
+        id: null,
+        userName: '',
+        passWord: '',
+        role_ID: 4,
     };
 
     const [Users, setUsers] = useState([]);
@@ -28,7 +27,7 @@ export default function UsersDemo() {
     const [submitted, setSubmitted] = useState(false);
     const toast = useRef(null);
     const dt = useRef(null);
-    const url = 'https://api.mocki.io/v2/1e376031/AdminCRUDUsers';
+    const url = 'https://localhost:7060/Users';
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchUserData = async () => {
@@ -64,12 +63,12 @@ export default function UsersDemo() {
     const saveUser = () => {
         setSubmitted(true);
 
-        if (User.UserName.trim()) {
+        if (User.userName.trim()) {
             let _Users = [...Users];
             let _User = { ...User };
 
-            if (User.ID) {
-                const index = findIndexById(User.ID);
+            if (User.id) {
+                const index = findIndexById(User.id);
 
                 _Users[index] = _User;
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
@@ -129,7 +128,7 @@ export default function UsersDemo() {
     const onCategoryChange = (e) => {
         let _User = { ...User };
 
-        _User["Role_ID"] = e.value;
+        _User["role_ID"] = e.value;
         setUser(_User);
     };
 
@@ -188,32 +187,32 @@ export default function UsersDemo() {
                 <Toolbar className="mb-4" start={leftToolbarTemplate} end={rightToolbarTemplate}></Toolbar>
 
                 <DataTable ref={dt} value={Users} selection={selectedUsers} onSelectionChange={(e) => setSelectedUsers(e.value)}
-                           dataKey="ID"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                           dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Users"
                            loading={loading}>
-                    <Column  field="ID" header="ID" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column  field="UserName" header="UserName" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column  field="PassWord" header="PassWord" sortable style={{ minWidth: '16rem' }}></Column>
-                    <Column  field="Role_ID" header="Role_ID" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column  field="id" header="ID" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column  field="userName" header="UserName" sortable style={{ minWidth: '12rem' }}></Column>
+                    <Column  field="passWord" header="PassWord" sortable style={{ minWidth: '16rem' }}></Column>
+                    <Column  field="role_ID" header="Role_ID" sortable style={{ minWidth: '10rem' }}></Column>
                     <Column  body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
                 </DataTable>
             </div>
 
             <Dialog visible={UserDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="User Details" modal className="p-fluid" footer={UserDialogFooter} onHide={hideDialog}>
                 <div className="field">
-                    <label htmlFor="UserName" className="font-bold">
-                        UserName
+                    <label htmlFor="userName" className="font-bold">
+                        userName
                     </label>
-                    <InputText id="UserName"  value={User.UserName} onChange={(e) => onInputChange(e, 'UserName')} required autoFocus className={classNames({ 'p-invalid': submitted && !User.UserName })} />
-                    {submitted && !User.UserName && <small className="p-error">UserName is required.</small>}
+                    <InputText id="userName"  value={User.userName} onChange={(e) => onInputChange(e, 'UserName')} required autoFocus className={classNames({ 'p-invalid': submitted && !User.UserName })} />
+                    {submitted && !User.userName && <small className="p-error">userName is required.</small>}
                 </div>
                 <div className="field">
-                    <label htmlFor="PassWord" className="font-bold">
+                    <label htmlFor="passWord" className="font-bold">
                         PassWord
                     </label>
-                    <Password  toggleMask id="PassWord" value={User.PassWord} onChange={(e) => onInputChange(e, 'PassWord')} required  className={classNames({ 'p-invalid': submitted && !User.PassWord })} />
-                    {submitted && !User.PassWord && <small className="p-error">PassWord is required.</small>}
+                    <Password  toggleMask id="passWord" value={User.passWord} onChange={(e) => onInputChange(e, 'PassWord')} required  className={classNames({ 'p-invalid': submitted && !User.PassWord })} />
+                    {submitted && !User.passWord && <small className="p-error">PassWord is required.</small>}
                 </div>
 
                 <div className="field">
@@ -240,7 +239,7 @@ export default function UsersDemo() {
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {User && (
                         <span>
-                            Are you sure you want to delete <b>{User.UserName}</b>?
+                            Are you sure you want to delete <b>{User.userName}</b>?
                         </span>
                     )}
                 </div>

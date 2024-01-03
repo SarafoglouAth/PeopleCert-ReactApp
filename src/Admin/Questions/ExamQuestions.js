@@ -17,15 +17,25 @@ import {InputTextarea} from "primereact/inputtextarea";
 import AnswersTable from "./AnswersTable";
 
 // TODO : FIx api call ( CRUD) for questions
-function ExamQuestions({Role}) {
+function ExamQuestions({questionsAnswers,handleQuestionVisibility ,Role}) {
 
 
     //data
     const [loading, setLoading] = useState(true);
-    const [exam, setExam] = useState(null);
+
+    const [exam, setExam] = useState(questionsAnswers)
+    useEffect(() => {
+        setLoading(true);
+        try {
+            setExam(questionsAnswers);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching Exam data:", error);
+        }
+    }, [questionsAnswers]);
     const admin = Role === "Admin";
 
-    const url = "https://webhook.site/544c124d-fab7-4767-bbdc-0e3a5cfa63c6";
+
 
     const [expandedRows, setExpandedRows] = useState(null);
 
@@ -42,21 +52,6 @@ function ExamQuestions({Role}) {
     });
 
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get(url);
-                setExam(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching Certification data:", error);
-            }
-        };
-
-        fetchUserData().then();
-    }, []);
-
-    //  TODO: Delete when authorization is complete
 
 
     const expandAll = () => {
@@ -70,6 +65,7 @@ function ExamQuestions({Role}) {
 
     const header = (
         <div className="flex flex-wrap justify-content-between align-items-center gap-2">
+
       <span>
         <h1>{exam?.testName}</h1>
       </span>
@@ -79,6 +75,12 @@ function ExamQuestions({Role}) {
                     icon="pi pi-minus"
                     label="Collapse All"
                     onClick={collapseAll}
+                    text
+                />
+                <Button
+                    icon="pi pi-arrow-left"
+                    label="Back"
+                    onClick={handleQuestionVisibility}
                     text
                 />
             </div>
