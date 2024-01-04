@@ -49,7 +49,7 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 2</h2>
+      <h2 className="form-title" class="text-center">Step 2</h2>
       <h3 className="section-title">ID</h3>
       <div>
         <InputText
@@ -58,7 +58,7 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
           value={personalDetails.idnumber}
           onChange={handleIdInputChange}
           name="idnumber"
-          className={!idNumberValid ? "p-invalid" : ""}
+          className={!idNumberValid ? "p-invalid" : "w-full"}
         />
       </div>
       {!idNumberValid && (
@@ -72,7 +72,7 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
           optionLabel="name"
           placeholder="ID Type"
           options={idType}
-          className={!idTypeValid ? "p-invalid" : "w-full md:w-14rem"}
+          className={!idTypeValid ? "p-invalid" : "w-full md:w-14rem:"}
         />
       </div>
 
@@ -86,7 +86,7 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
           onChange={handleIdInputChange}
           name="idissuedate"
           placeholder="ID Issue Date"
-          className={!idIssueDateValid ? "p-invalid" : ""}
+          className={!idIssueDateValid ? "p-invalid" : "w-full"}
         />
       </div>
       {!idIssueDateValid && (

@@ -1,7 +1,8 @@
 @import "~primeflex/primeflex.css";
 body {
-  margin: 0;
+  background: linear-gradient(to right, rgb(150, 165, 165), rgb(180, 73, 70));
   height: 100vh;
+  margin: 0;
 }
 .p-password {
   width: inherit;
@@ -9,3 +10,8 @@ body {
 .p-password-input {
   width: inherit;
 }
+
+h2{
+  color: grey;
+}
+

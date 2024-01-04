@@ -57,7 +57,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 1</h2>
+      <h2 className="form-title" class="text-center">Step 1</h2>
       <h3 className="section-title">Personal Details</h3>
       <div>
         <InputText
@@ -66,7 +66,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
           value={personalDetails.firstName}
           onChange={handleInputChange}
           name="firstName"
-          className={!firstNameValid ? "p-invalid" : ""}
+          className={!firstNameValid ? "p-invalid" : "w-full"}
         />
       </div>
       <br />
@@ -77,7 +77,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
           value={personalDetails.lastName}
           onChange={handleInputChange}
           name="lastName"
-          className={!lastNameValid ? "p-invalid" : ""}
+          className={!lastNameValid ? "p-invalid" : "w-full"}
         />
       </div>
       <br />
@@ -88,7 +88,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
           showIcon
           name="birthdate"
           placeholder="Birth Date"
-          className={!birthdateValid ? "p-invalid" : ""}
+          className={!birthdateValid ? "p-invalid" : "w-full"}
         />
       </div>
       <br />
@@ -99,7 +99,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
           optionLabel="name"
           placeholder="Native Language"
           options={natives}
-          className="w-full md:w-14rem"
+          className="w-full md:w-14rem:"
         />
       </div>
       <br />
@@ -110,7 +110,7 @@ const PersonalDetails = ({ personalDetails, onInputChange }) => {
           optionLabel="name"
           placeholder="Gender"
           options={genderOptions}
-          className="w-full md:w-14rem"
+          className="w-full md:w-14rem:"
         />
       </div>
     </>

@@ -45,16 +45,15 @@ const ContactInfo = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 3</h2>
+      <h2 className="form-title" class="text-center">Step 3</h2>
       <h3 className="section-title">Contact</h3>
-      <br />
       <InputText
         placeholder="Email"
         type="email"
         value={personalDetails.email}
         onChange={handleInputChange}
         name="email"
-        className={!emailValid ? "p-invalid" : ""}
+        className={!emailValid ? "p-invalid" : "w-full"}
       />
       <br />
       {!emailValid && (
@@ -67,7 +66,7 @@ const ContactInfo = ({ personalDetails, onInputChange }) => {
         value={personalDetails.mobilenumber}
         onChange={handleInputChange}
         name="mobilenumber"
-        className={!mobileNumberValid ? "p-invalid" : ""}
+        className={!mobileNumberValid ? "p-invalid" : "w-full"}
       />
       <br />
       {!mobileNumberValid && (
@@ -82,7 +81,7 @@ const ContactInfo = ({ personalDetails, onInputChange }) => {
         value={personalDetails.landlinenumber}
         onChange={handleInputChange}
         name="landlinenumber"
-        className={!landlineNumberValid ? "p-invalid" : ""}
+        className={!landlineNumberValid ? "p-invalid" : "w-full"}
       />
       <br />
       {!landlineNumberValid && (

@@ -41,7 +41,7 @@ export const LoginSignup = () => {
     <div class="h-screen flex justify-content-center align-content-center flex-wrap">
       <div class="grid w-full center">
         <div class="col-2 col-offset-5">
-          <Card className="w-full">
+          <Card className="w-22rem h-auto" >
             {step === 0 && <UsernamePassword personalDetails={formData} onInputChange={onInputChange} />}
             {step === 1 && <PersonalDetails personalDetails={formData} onInputChange={onInputChange} />}
             {step === 2 && <IdInfo personalDetails={formData} onInputChange={onInputChange} />}

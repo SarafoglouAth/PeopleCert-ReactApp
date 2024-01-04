@@ -57,7 +57,7 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
 
   return (
     <>
-      <h2 className="form-title">Step 4</h2>
+      <h2 className="form-title" class="text-center">Step 4</h2>
       <h3 className="section-title">Address</h3>
       <div>
         <InputText
@@ -66,7 +66,7 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
           type="text"
           value={personalDetails.adress}
           name="adress"
-          className={!addressValid ? "p-invalid" : ""}
+          className={!addressValid ? "p-invalid" : "w-full"}
         />
       </div>
       {!addressValid && (
@@ -79,6 +79,7 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
         value={personalDetails.adressLine2}
         onChange={onInputChange}
         name="adressLine2"
+        className="w-full"
       />
       <div>
         <br />
@@ -88,7 +89,7 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
           optionLabel="name"
           placeholder="Country of residence"
           options={countries}
-          className="w-full md:w-14rem"
+          className="w-full md:w-14rem:"
         />
       </div>
       <br />
@@ -99,7 +100,7 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
           value={personalDetails.province}
           onChange={handleInputChange}
           name="province"
-          className={!provinceValid ? "p-invalid" : ""}
+          className={!provinceValid ? "p-invalid" : "w-full"}
         />
       </div>
       {!provinceValid && (
@@ -113,21 +114,24 @@ const AddressInfo = ({ personalDetails, onInputChange }) => {
           value={personalDetails.city}
           onChange={handleInputChange}
           name="city"
-          className={!cityValid ? "p-invalid" : ""}
+          className={!cityValid ? "p-invalid" : "w-full"}
         />
-        {!cityValid && (
-          <small className="p-error">Please enter a valid city</small>
-        )}
       </div>
+      {!cityValid && (
+        <small className="p-error">Please enter a valid city</small>
+      )}
+
       <br />
-      <InputText
-        placeholder="Postal Code"
-        type="text"
-        value={personalDetails.postalcode}
-        onChange={handleInputChange}
-        name="postalcode"
-        className={!postalCodeValid ? "p-invalid" : ""}
-      />
+      <div>
+        <InputText
+          placeholder="Postal Code"
+          type="text"
+          value={personalDetails.postalcode}
+          onChange={handleInputChange}
+          name="postalcode"
+          className={!postalCodeValid ? "p-invalid" : "w-full"}
+        />
+      </div>
       {!postalCodeValid && (
         <small className="p-error">Please enter a valid postal code</small>
       )}
