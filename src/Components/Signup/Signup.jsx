@@ -10,11 +10,15 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import { useSignUp } from "./useSignUp";
 
 
 export const LoginSignup = () => {
   const [step, setStep] = useState(0);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    "username": "admin", "password": "admin", "firstName": "nikos", "lastName": "nikos", "birthdate": "2024-01-24T22:00:00.000Z", "nativeLanguage": "Afrikaans", "gender": "male", "idnumber": "3242", "idtype": 0, "idissuedate": "2024-01-14T22:00:00.000Z", "email": "nkperperidis@gmail.com", "mobilenumber": "689354564", "landlinenumber": "325454564", "adress": "Αντωνίου Χρηστομάνου 28-30", "province": "Αττική", "city": "ΑΘΗΝΑ", "postalcode": "10443", "adressLine2": "asdasd", "countryofresidence": "Albania"
+  });
+  const { loading, signUp } = useSignUp()
 
   const nextStep = (e) => {
     e.preventDefault();
@@ -27,7 +31,7 @@ export const LoginSignup = () => {
 
   const handleSubmit = () => {
     console.log("Form submitted:", formData);
-    // window.alert("Form submitted successfully!");
+    signUp(formData)
   };
 
   const onInputChange = (e) => {

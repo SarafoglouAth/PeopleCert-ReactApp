@@ -1,8 +1,8 @@
 const idType = [
-    { name: 'National card', value: 'national card' },
-    { name: 'Passport', value: 'passport' },
-    { name: 'Driver Liecense', value: 'driver liecense' },
-    
-  ];
-  
-  export default idType;
+  { name: 'National card', value: 2 },
+  { name: 'Passport', value: 0 },
+  { name: 'Driver Liecense', value: 1 },
+
+];
+
+export default idType;

@@ -1,6 +1,6 @@
 @import "~primeflex/primeflex.css";
 body {
-  background: linear-gradient(to right, rgb(150, 165, 165), rgb(180, 73, 70));
+  background-color: whitesmoke;
   height: 100vh;
   margin: 0;
 }

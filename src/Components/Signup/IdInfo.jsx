@@ -20,10 +20,7 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
   const validateIdIssueDate = (value) => {
     setIdIssueDateValid(value !== null);
   };
-  const handleidtypeChange = (e) => {
-    const { value } = e.target;
-    onInputChange({ target: { name: "idtype", value } });
-  };
+
 
   const handleIdInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,8 +65,8 @@ const IdInfo = ({ personalDetails, onInputChange }) => {
       <div>
         <Dropdown
           value={personalDetails.idtype}
-          onChange={handleidtypeChange}
           optionLabel="name"
+          onChange={(e) => onInputChange({ target: { name: 'idtype', value: e.target.value } })}
           placeholder="ID Type"
           options={idType}
           className={!idTypeValid ? "p-invalid" : "w-full md:w-14rem:"}
